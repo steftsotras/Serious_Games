@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="gr">
+<head>
+    <title>REGISTRATION</title>
+<h1>ΠΑΙΧΝΙΔΙΑ ΣΟΒΑΡΟΥ ΣΚΟΠΟΥ</h1><br>
+<h2>Δημιουργία Λογαριασμού</h2>
+    <meta charset="UTF-8">
+    <style>
+	h2{
+	color : #ffa31a;
+	}
+       body {
+  background-color: #2f2f1e;
+}
+h1 {
+  color: #ffa31a;
+  margin-left: 40px;
+} 
+tr {
+color: #ffa31a;
+margin-left: 10px;
+font-size: 18pt;
+line-height: 25pt;
+font-family: Arial, sans serif;       
+}
+
+        
+    </style>
+</head>
+<body>
+   
+    <form action="register_server.php" method="post">
+    <table>
+        <tr>
+            <td>Αναγνωριστικό Χρήστη</td>
+            <td><input type="text" name="username"
+                       placeholder="εισαγωγη εδω"></td>
+        </tr>
+        
+        <tr>
+            <td>Κωδικός χρήστη</td>
+            <td><input type="password" name="password"
+                       placeholder="εισαγωγη εδω"></td>
+        </tr>
+        
+        <tr>
+            <td>Φύλλο</td>
+            <td><input type="radio" name="gender" value="male">ΑΡΣΕΝΙΚΟ</td>
+            <td><input type="radio" name="gender" value="female" style="margin-left: -300px" />ΘΥΛΗΚΟ</td>
+            
+        </tr>
+        
+        <tr>
+            <td>Πόλη διαμονής</td>
+            <td><input type="text" name="city"
+                       placeholder="εισαγωγη εδω"></td>
+        </tr>
+		
+		<tr>
+            <td>Ημερομηνία Γέννησης</td>
+            <td><input type="date" name="birthdate"</td>
+        </tr>
+        
+        <tr>
+            <td>Εκπαίδευση</td>
+            <td><input type="radio" name="education" value="none">ΚΑΜΙΑ</td>
+            <td><input type="radio" name="education" value="elementary" style="margin-left: -430px" />ΔΗΜΟΤΙΚΟ</td>
+            <td><input type="radio" name="education" value="second" style="margin-left: -280px" />ΓΥΜΝΑΣΙΟ</td>
+            <td><input type="radio" name="education" value="high" style="margin-left: -130px" />ΛΥΚΕΙΟ</td>
+            <td><input type="radio" name="education" value="uni" style="margin-left: -10px" >ΠΑΝΕΠΙΣΤΗΜΙΟ</td>
+        </tr>
+		
+		<tr>
+            <td>Επιλογή επιπέδου δυσκολίας</td>   
+            <td><p><select></p>
+			 <option name="difficulty" value=5 selected="difficulty_level_all">
+                  ΟΛΑ ΤΑ ΕΠΙΠΕΔΑ
+              </option>
+            <option name="difficulty" value=1>ΕΥΚΟΛΟ</option>
+            <option name="difficulty" value=2>ΜΕΣΑΙΟ</option>
+            <option name="difficulty" value=3>ΠΡΟΧΩΡΗΜΕΝΟ</option>
+            <option name="difficulty" value=4>ΕΥΚΟΛΟ ΕΩΣ ΜΕΣΑΙΟ</option>
+        </select>
+                    </td>
+            </tr>
+		
+        
+        <tr>
+            <td><input type="submit" name="submit"
+            value="Submit">
+            </td>
+            
+            <td>
+                ΕΙΣΤΕ ΗΔΗ ΧΡΗΣΤΗΣ?<a href="profile.php" style="color:red;margin-left: 25px">πατήστε εδώ για είσοδο</a>
+            </td>
+            
+        </tr>
+        
+        
+        
+        
+    </table>
+            </form>
+	
+	<audio controls>
+  <source src="Recording3.m4a" type="audio/mpeg">
+</audio>
+
+</body>
+</html>
