@@ -13,7 +13,7 @@
         exit();
     }
 
-    $sql = "SELECT username, password FROM userr WHERE username='$username' and password='$password'";
+    $sql = "SELECT username, password FROM user WHERE username='$username' and password='$password'";
     
     $result = mysqli_query($link, $sql) or die(mysqli_error($link));
     $count = mysqli_num_rows($result);

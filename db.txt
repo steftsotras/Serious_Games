@@ -1,0 +1,21 @@
+
+create table user(userID integer NOT NULL AUTO_INCREMENT PRIMARY KEY,username varchar(50),password varchar(100),gender varchar(10),city varchar(50),birthdate date,
+education varchar(50),difficulty_level integer);
+
+create table login(loginID integer NOT NULL PRIMARY KEY,datee date,userID integer,FOREIGN KEY (userID) REFERENCES user(userID));
+
+create table game(gameID integer NOT NULL AUTO_INCREMENT PRIMARY KEY,game_name varchar(50),description varchar(100));
+
+create table statistics(statisticsID integer NOT NULL AUTO_INCREMENT PRIMARY KEY,userID integer,gameID integer,rounds integer,
+hit integer,miss integer,quits integer,score float,accuracy float,AvgSpeed float,playTotalTime float,FOREIGN KEY (userID) REFERENCES user(userID),
+FOREIGN KEY (gameID) REFERENCES game(gameID));
+
+create table gameevent(gameeventID integer NOT NULL AUTO_INCREMENT PRIMARY KEY,gameID integer ,userID integer,
+hit integer,miss integer,quits integer,score float,accuracy float,AvgSpeed float,playtime float,levell integer,
+starttimestamp date,endtimestamp date,FOREIGN KEY (gameID) REFERENCES game(gameID),FOREIGN KEY (userID) REFERENCES user(userID));
+
+create table surveyquestion(qID integer NOT NULL AUTO_INCREMENT PRIMARY KEY,description varchar(300));
+
+create table surveyanswear(aID integer NOT NULL AUTO_INCREMENT PRIMARY KEY,qID integer,answear varchar(300),userID integer,
+loginID integer,FOREIGN KEY (qID) REFERENCES surveyquestion(qID),FOREIGN KEY (userID) REFERENCES user(userID),
+FOREIGN KEY (loginID) REFERENCES login(loginID));

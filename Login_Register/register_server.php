@@ -1,5 +1,5 @@
  <?php
-include "connect.php";
+include "../connect.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && (isset($_POST['submit'])) && ($_POST['submit'] == 'Submit')) {
 
@@ -10,10 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && (isset($_POST['submit'])) && ($_POST
     $city = mysqli_real_escape_string($link, $_POST['city']);
     $birthdate = $_POST['birthdate'];
     $education = mysqli_real_escape_string($link, $_POST['education']);
-    //$difficulty = $_POST['difficulty'];
+    $difficulty = $_POST['difficulty'];
 
 	
-	echo $username . ' ' . $password . ' ' . $gender . ' ' . $city . ' ' . $birthdate . ' ' . $education;
 	
 	if ((empty($username)) || empty($password)) {
 		
@@ -24,13 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && (isset($_POST['submit'])) && ($_POST
         header("Location: register.php");
         exit();
     }
-	$difficulty_level = 1;
-	$ai = 1;
+	
     mysqli_autocommit($link, false);
 
-    $query = "insert into userr 
+    $query = "insert into user
                             (
-                                userID,
                                 username,
 								password,
                                 gender,
@@ -41,14 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && (isset($_POST['submit'])) && ($_POST
                             ) 
                             Values
                             (
-                                '$ai',
                                 '$username',
 								'$password',
                                 '$gender',
                                 '$city',
                                 '$birthdate',
                                 '$education',
-                                '$difficulty_level'
+                                '$difficulty'
                             )";
 							
 	
