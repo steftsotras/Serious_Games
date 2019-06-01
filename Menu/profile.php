@@ -23,109 +23,196 @@ body {
 
 h1 {
   color: #ffa31a;
-  margin-left: 40px;
+} 
+h2 {
+  color: #ffa31a;
 } 
 div {
-color: #ffa31a;
-margin-left: 10px;       
+color: #ffa31a;    
 }
 
 tr {
 color: #FFD700;
-margin-left: 10px;
+margin-left: 20px;
 font-size: 18pt;
 line-height: 30pt;
-font-family: Arial, sans serif;       
+font-family: Arial, sans serif;
 }
 
-input[type="radio"]{
-  margin: 0 10px 0 10px;
+
+#container {
+    width: 100%;
+	display: flex;
+    text-align:center;
+	margin: 0 auto;
+	border: 1px solid red;
+	position: relative;
 }
+
+
+
+#left {
+	flex: 1;
+    float:left;
+    width:200px;
+	margin-right:100px;
+}
+
+#center {
+	flex: 1;
+    display: inline-block;
+    margin-right:10px;
+    width:100px;
+}
+
+#right {
+	flex: 1;
+    margin-left:0px;
+    width:200px;
+}
+
+#cont_btn
+{
+	background-color: purple;
+	color: black;
+	width: 270px;
+	height: 60px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#logout_btn
+{
+	background-color: red;
+	color: black;
+	width: 270px;
+	height: 60px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
 
 </style>
-    <h1>ΤΟ ΠΡΟΦΙΛ ΣΟΥ</h1>
+    
      
     </head>
     <body>
 	<br>
-	<div>
-	<h2>ΔΗΜΟΓΡΑΦΙΚΑ ΣΤΟΙΧΕΙΑ</h2>
 	
-	<form action="register_server.php" method="post">
-    <table>
-        
-        <td>
-        <tr>
-            <td>Φύλλο</td>
-            <td><input type="radio" name="gender" value="male">ΑΡΣΕΝΙΚΟ</td>
-            <td><input type="radio" name="gender" value="female" style="margin-left: -300px" />ΘΥΛΗΚΟ</td>
-            
-        </tr>
-        
-        <tr>
-            <td>Πόλη διαμονής</td>
-            <td><input type="text" name="city"
-                       placeholder="εισαγωγη εδω"></td>
-        </tr>
-		
-		<tr>
-            <td>Ημερομηνία Γέννησης</td>
-            <td><input type="date" name="birthdate"</td>
-        </tr>
-        
-        <tr>
-            <td>Εκπαίδευση</td>
-            <td><input type="radio" name="education" value="none">ΚΑΜΙΑ</td>
-            <td><input type="radio" name="education" value="elementary" style="margin-left: -430px" />ΔΗΜΟΤΙΚΟ</td>
-            <td><input type="radio" name="education" value="second" style="margin-left: -280px" />ΓΥΜΝΑΣΙΟ</td>
-            <td><input type="radio" name="education" value="high" style="margin-left: -130px" />ΛΥΚΕΙΟ</td>
-            <td><input type="radio" name="education" value="uni" style="margin-left: -10px" >ΠΑΝΕΠΙΣΤΗΜΙΟ</td>
-        </tr>
-		
-		<td><input type="submit" name="submit"
-            value="ΑΛΛΑΓΗ ΔΗΜΟΓΡΑΦΙΚΩΝ ΣΤΟΙΧΕΙΩΝ"></input>
-        </td>
-	</table>
-	</div>
-        
-		<br>
-		
-		<tr>
-            <td>Κωδικός χρήστη</td>
-            <td><input type="password" name="password"
-                       placeholder="εισαγωγη εδω"></td>
-			<td><button onclick="Function1()">ΑΛΛΑΓΗ ΚΩΔΙΚΟΥ</button></td>
-        </tr>
-		<br>
-       
-        <p><select></p>
-			 <option selected="difficulty_level_all">
-                  ΟΛΑ ΤΑ ΕΠΙΠΕΔΑ
-              </option>
-            <option value="difficulty_level_1">ΕΥΚΟΛΟ</option>
-            <option value="difficulty_level_2">ΜΕΣΑΙΟ</option>
-            <option value="difficulty_level_3">ΠΡΟΧΩΡΗΜΕΝΟ</option>
-            <option value="difficulty_level_4">ΕΥΚΟΛΟ ΕΩΣ ΜΕΣΑΙΟ</option>
-        </select>
-		
-		<p><button onclick="Function2()">ΣΥΝΕΧΕΙΑ ΣΤΟ ΜΕΝΟΥ ΠΑΙΧΝΙΔΙΩΝ</button></p>
+	<div id="container">	
+		<div id="left"><h1>ΤΟ ΠΡΟΦΙΛ ΣΟΥ</h1>
+		<p>ΚΑΛΟΣΩΡΙΣΕΣ <?php echo $_SESSION['username'];?></p>
 		
 		
-       <p id="demo"></p>
-	   
-	    <audio controls>
-		  <source src="Recording.m4a" type="audio/mpeg">
-		</audio>
-
-		<br>
-		<br>
-
-	    <tr>
+		<div id="live_data"></div>
+		
+		</div>
+		
+		<div id="center">
+			<h2 align="left">ΔΗΜΟΓΡΑΦΙΚΑ ΣΤΟΙΧΕΙΑ</h2>
+			
+			<form action="change_settings.php" method="post">
+			<table>
+				<tr>
+				<tr>
+					<td>Φύλλο</td>
+					<td><input type="radio" name="gender" value="male">ΑΡΣΕΝΙΚΟ</td>
+					
+				</tr>
+				<tr><td></td><td><input type="radio" name="gender" value="female"/>ΘΥΛΗΚΟ</td></tr>
+				</tr>
+				<tr>
+					<td>Πόλη διαμονής</td>
+					<td><input type="text" name="city"
+							   placeholder="εισαγωγη εδω"></td>
+				</tr>
+				
+				<tr>
+					<td>Ημερομηνία Γέννησης</td>
+					<td><input type="date" name="birthdate"</td>
+				</tr>
+				
+				<tr>
+					<tr>
+					<td>Εκπαίδευση</td>
+					<td><input type="radio" name="education" value="none">ΚΑΜΙΑ</td>
+					</tr>
+					<tr><td></td><td><input type="radio" name="education" value="elementary" />ΔΗΜΟΤΙΚΟ</td></tr>
+					<tr><td></td><td><input type="radio" name="education" value="second" />ΓΥΜΝΑΣΙΟ</td></tr>
+					<tr><td></td><td><input type="radio" name="education" value="high" />ΛΥΚΕΙΟ</td></tr>
+					<tr><td></td><td><input type="radio" name="education" value="uni" >ΠΑΝΕΠΙΣΤΗΜΙΟ</td></tr>
+				</tr>
+				
+				<tr>
+				<td><input type="submit" name="submit"
+					value="ΑΛΛΑΓΗ ΔΗΜΟΓΡΑΦΙΚΩΝ ΣΤΟΙΧΕΙΩΝ"></input>
+				</td>
+				</tr>
+			</table>
+		
+		</div>
+		
+		
+		<div id="right">
+			
+			
+			<div>
+			<table><tr><td>
+			<h2>ΚΩΔΙΚΟΣ ΧΡΗΣΤΗ</h2></td>
+			</tr>
+			
+			<tr>
+				<td><input type="password" name="password"
+						   placeholder="εισαγωγη εδω"></td></tr>
+			<tr>
+				<td><button onclick="Function1()">ΑΛΛΑΓΗ ΚΩΔΙΚΟΥ</button></td>
+			</tr>
+			</table>
+			</div>
+			
+			<br>
+			<div>
+			<table>
+			<tr>
 			<td>
-				<button id="logout_btn">Logout</button>
+			<h2>ΔΥΣΚΟΛΙΑ ΠΑΙΧΝΙΔΙΩΝ</h2>
 			</td>
-		</tr>  
-        
+			</tr>
+			<tr>
+			<td>
+			<p><select></p>
+				 <option selected="difficulty_level_all">
+					  ΟΛΑ ΤΑ ΕΠΙΠΕΔΑ
+				  </option>
+				<option value="difficulty_level_1">ΕΥΚΟΛΟ</option>
+				<option value="difficulty_level_2">ΜΕΣΑΙΟ</option>
+				<option value="difficulty_level_3">ΠΡΟΧΩΡΗΜΕΝΟ</option>
+				<option value="difficulty_level_4">ΕΥΚΟΛΟ ΕΩΣ ΜΕΣΑΙΟ</option>
+			</select>
+			</td>
+			</tr>
+			<tr>
+			<p><td><button onclick="Function1()">ΑΛΛΑΓΗ ΔΥΣΚΟΛΙΑΣ</button></p>
+			</tr>
+			</table>
+			</div>
+			
+			<br>
+			<div align="left">
+				<p><button style="display:inline-block;" id="cont_btn" type="button">ΣΥΝΕΧΕΙΑ ΣΤΟ ΜΕΝΟΥ ΠΑΙΧΝΙΔΙΩΝ</button>
+				</p>
+				<p><button id="logout_btn" type="button">ΑΠΟΣΥΝΔΕΣΗ</button></p>
+			</div>
+			
+		
+		</div>
+		
+		
+		
+		
+			
+	
+    </div>    
    
     </body>
 </html>
@@ -140,8 +227,9 @@ lgout_btn.addEventListener('click', function() {
   document.location.href = 'unset_sess.php';
 });
 
-
-
+document.getElementById("cont_btn").onclick = function () {
+        location.href = "/menu.php";
+};
 
 
 //
