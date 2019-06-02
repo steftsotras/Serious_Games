@@ -228,7 +228,7 @@ document.getElementById("submit_btn").onclick = function () {
         var gender = $("input[name='gender']:checked").val();
 		var education = $("input[name='education']:checked").val();
 		var city = $("input[name='city']").val();
-		var birthdate = new Date($("input[name='birthdate']").val());
+		var birthdate = $("input[name='birthdate']").val();
 		json_data = {
 			gender: gender,
 			education:education,
@@ -245,7 +245,7 @@ document.getElementById("pass_btn").onclick = function () {
 };
 
 document.getElementById("diff_btn").onclick = function () {
-        var difficulty = $('select.diff').find(':selected').data('value');
+        var difficulty = $('select.diff').find(':selected').val();
 		json_data = {difficulty: difficulty};
 		post_data(json_data);
 };
@@ -265,18 +265,10 @@ function get_data(){
 }
 
 function post_data(json_data){
-	$.ajax({  
-		url:"change_settings.php",  
-		method:"POST",
-		data:json_data,
-		//contentType: 'application/json; charset=utf-8',
-		dataType: "text",
-		success:function(data){  
-			
-			get_data(); 
-			 
-		}  
-	}); 
+	console.log(json_data);
+	
+	$.post('change_settings.php',json_data,function(data){get_data();});
+	
 }
 
 

@@ -2,16 +2,14 @@
 session_start();
 include "../connect.php";
 
-$data = json_decode(file_get_contents("php://input"));
 
-echo("<script>console.log('PHP: ".$data."');</script>");
-//dhmografika stoixeia
-if ((isset($data->gender)) ) {
 
-    $gender = $data->gender;
-    $city = $data->city;
-    $birthdate = $data->birthdate;
-    $education = $data->education;
+if ((isset($_POST['gender'])) ) {
+
+    $gender = $_POST['gender'];
+    $city = $_POST['city'];
+    $birthdate = $_POST['birthdate'];
+    $education = $_POST['education'];
 	
     mysqli_autocommit($link, false);
 
@@ -35,9 +33,9 @@ if ((isset($data->gender)) ) {
 
 
 }
-elseif ((isset($data->password))) {
+elseif ((isset($_POST['password']))) {
 
-	$password = md5($data->password);
+	$password = md5($_POST['password']);
 
 	mysqli_autocommit($link, false);
 
@@ -60,9 +58,9 @@ elseif ((isset($data->password))) {
 
 }
 
-if ((isset($data->difficulty))) {
+if ((isset($_POST['difficulty']))) {
 
-	$difficulty = $data->difficulty;
+	$difficulty = $_POST['difficulty'];
 	
 	$query = "UPDATE user SET difficulty_level = '".$difficulty."' WHERE username = '".$_SESSION['username']."'";
 
