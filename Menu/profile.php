@@ -221,7 +221,7 @@ document.getElementById("logout_btn").onclick = function () {
 };
 
 document.getElementById("cont_btn").onclick = function () {
-        location.href = "/menu.php";
+        location.href = "../Menu/menu.php";
 };
 
 document.getElementById("submit_btn").onclick = function () {
