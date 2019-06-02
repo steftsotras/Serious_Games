@@ -27,9 +27,7 @@ h1 {
 h2 {
   color: #ffa31a;
 } 
-div {
-color: #ffa31a;    
-}
+
 
 tr {
 color: #FFD700;
@@ -45,17 +43,15 @@ font-family: Arial, sans serif;
 	display: flex;
     text-align:center;
 	margin: 0 auto;
-	border: 1px solid red;
+	
 	position: relative;
 }
+div {
+color: #ffa31a;    
+}
 
-
-
-#left {
-	flex: 1;
-    float:left;
-    width:200px;
-	margin-right:100px;
+#live_data {
+	padding:40px;
 }
 
 #center {
@@ -97,21 +93,19 @@ font-family: Arial, sans serif;
      
     </head>
     <body>
-	<br>
-	
-	<div id="container">	
-		<div id="left"><h1>ΤΟ ΠΡΟΦΙΛ ΣΟΥ</h1>
-		<p>ΚΑΛΟΣΩΡΙΣΕΣ <?php echo $_SESSION['username'];?></p>
-		
+	<div id="container">
+		<h1>ΤΟ ΠΡΟΦΙΛ ΣΟΥ <?php echo $_SESSION['username'];?></h1>
 		
 		<div id="live_data"></div>
 		
 		</div>
+	<div id="container">	
+		
 		
 		<div id="center">
 			<h2 align="left">ΔΗΜΟΓΡΑΦΙΚΑ ΣΤΟΙΧΕΙΑ</h2>
 			
-			<form action="change_settings.php" method="post">
+			
 			<table>
 				<tr>
 				<tr>
@@ -144,8 +138,7 @@ font-family: Arial, sans serif;
 				</tr>
 				
 				<tr>
-				<td><input type="submit" name="submit"
-					value="ΑΛΛΑΓΗ ΔΗΜΟΓΡΑΦΙΚΩΝ ΣΤΟΙΧΕΙΩΝ"></input>
+				<td><button id="submit_btn" >ΑΛΛΑΓΗ ΔΗΜΟΓΡΑΦΙΚΩΝ ΣΤΟΙΧΕΙΩΝ</button>
 				</td>
 				</tr>
 			</table>
@@ -165,7 +158,7 @@ font-family: Arial, sans serif;
 				<td><input type="password" name="password"
 						   placeholder="εισαγωγη εδω"></td></tr>
 			<tr>
-				<td><button onclick="Function1()">ΑΛΛΑΓΗ ΚΩΔΙΚΟΥ</button></td>
+				<td><button id="pass_btn">ΑΛΛΑΓΗ ΚΩΔΙΚΟΥ</button></td>
 			</tr>
 			</table>
 			</div>
@@ -180,19 +173,19 @@ font-family: Arial, sans serif;
 			</tr>
 			<tr>
 			<td>
-			<p><select></p>
-				 <option selected="difficulty_level_all">
+			<p><select class="diff" name="diff"></p>
+				 <option value=5 selected="difficulty_level_all">
 					  ΟΛΑ ΤΑ ΕΠΙΠΕΔΑ
 				  </option>
-				<option value="difficulty_level_1">ΕΥΚΟΛΟ</option>
-				<option value="difficulty_level_2">ΜΕΣΑΙΟ</option>
-				<option value="difficulty_level_3">ΠΡΟΧΩΡΗΜΕΝΟ</option>
-				<option value="difficulty_level_4">ΕΥΚΟΛΟ ΕΩΣ ΜΕΣΑΙΟ</option>
+				<option value=1>ΕΥΚΟΛΟ</option>
+				<option value=2>ΜΕΣΑΙΟ</option>
+				<option value=3>ΠΡΟΧΩΡΗΜΕΝΟ</option>
+				<option value=4>ΕΥΚΟΛΟ ΕΩΣ ΜΕΣΑΙΟ</option>
 			</select>
 			</td>
 			</tr>
 			<tr>
-			<p><td><button onclick="Function1()">ΑΛΛΑΓΗ ΔΥΣΚΟΛΙΑΣ</button></p>
+			<p><td><button id="diff_btn">ΑΛΛΑΓΗ ΔΥΣΚΟΛΙΑΣ</button></p>
 			</tr>
 			</table>
 			</div>
@@ -214,6 +207,7 @@ font-family: Arial, sans serif;
 	
     </div>    
    
+   
     </body>
 </html>
 
@@ -221,32 +215,70 @@ font-family: Arial, sans serif;
 
 <script>
 
-//Logout
-var lgout_btn = document.getElementById('logout_btn');
-lgout_btn.addEventListener('click', function() {
-  document.location.href = 'unset_sess.php';
-});
+
+document.getElementById("logout_btn").onclick = function () {
+        location.href = "/unset_sess.php";
+};
 
 document.getElementById("cont_btn").onclick = function () {
         location.href = "/menu.php";
 };
 
+document.getElementById("submit_btn").onclick = function () {
+        var gender = $("input[name='gender']:checked").val();
+		var education = $("input[name='education']:checked").val();
+		var city = $("input[name='city']").val();
+		var birthdate = new Date($("input[name='birthdate']").val());
+		json_data = {
+			gender: gender,
+			education:education,
+			city:city,
+			birthdate:birthdate
+		};
+		post_data(json_data);
+};
 
-//
-function Function1() {
-  document.getElementById("demo").innerHTML = "Hello World";
-}
-</script>
+document.getElementById("pass_btn").onclick = function () {
+        var password = $("input[name='password']").val();
+		json_data = {password: password};
+		post_data(json_data);
+};
 
-<script>
-function Function3() {
-  document.getElementById("demo").innerHTML = "Hello";
+document.getElementById("diff_btn").onclick = function () {
+        var difficulty = $('select.diff').find(':selected').data('value');
+		json_data = {difficulty: difficulty};
+		post_data(json_data);
+};
+
+$(document).ready(get_data); 
+
+function get_data(){
+	$.ajax({  
+		url:"profile_data.php",  
+		method:"GET",
+		success:function(data){  
+			
+			$('#live_data').html(data); 
+			 
+		}  
+	}); 
 }
-</script>
-<script>
-function Function2() {
-  document.getElementById("demo").innerHTML = "World";
+
+function post_data(json_data){
+	$.ajax({  
+		url:"change_settings.php",  
+		method:"POST",
+		data:json_data,
+		//contentType: 'application/json; charset=utf-8',
+		dataType: "text",
+		success:function(data){  
+			
+			get_data(); 
+			 
+		}  
+	}); 
 }
+
 
 </script>
 
