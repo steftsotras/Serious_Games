@@ -93,6 +93,12 @@ button
 	cursor: pointer;
 }
 
+#label1{
+	background-color: #ffa31a;
+	color: black;
+	font-size: 30px;
+	
+}
 
 </style>
     
@@ -100,13 +106,20 @@ button
     </head>
 	
     <body>
-	<br>
+	
 	<div id="container">
 	
 	<div align="center" style="margin: 0px auto;">
 		<h1>ΠΑΙΧΝΙΔΙ ΥΠΟΛΟΓΙΣΜΟΣ</h1>
 	</div>
 	<div id="center">
+	
+	<div>
+		<button id="back_btn" type="button">ΠΙΣΩ ΣΤΟ ΜΕΝΟΥ</button>
+		
+	</div>
+	<br>
+	
 	<div class="grid-container">
 	  <div id="item1" class="item1"></div>
 	  <div id="item2" class="item2"></div>
@@ -140,7 +153,7 @@ button
 	<button id="check_btn" type="button">ΕΛΕΓΧΟΣ</button>
 	<button id="clear_btn" type="button">ΚΑΘΑΡΙΣΜΟΣ</button>
 	</div>
-	
+	<br>
 	<div>
 	<label id="label1"></label>
 	</div>
@@ -153,11 +166,15 @@ button
 
 <script>
 
-var lvl_played = 1;
+var lvl_played;
 var dif = <?php echo $_SESSION['dif'];?>;
 
 document.getElementById("clear_btn").onclick = function () {
     clear();
+};
+
+document.getElementById("back_btn").onclick = function () {
+    location.href = "../Menu/menu.php";
 };
 
 document.getElementById("check_btn").onclick = function () {
@@ -175,6 +192,7 @@ $(document).ready(function(){
 		lvl2();
 	}
 	else if(dif == 3){
+		lvl_played = 3;
 		lvl3();
 	}
 });
@@ -287,16 +305,42 @@ function lvl2_2(){
 function lvl3(){
 	
 	$('#item1').text(8);
-	$('#item2').text('+');
+	$('#item2').text('x');
 	$('#item4').text('=');
-	$('#item5').text(15);
-	$('#item6').text('+');
+	$('#item5').text(32);
+	$('#item6').text(':');
 	$('#item7').css('background-color', '#696969');
-	$('#item8').text('-');
+	$('#item8').text(':');
 	$('#item9').css('background-color', '#696969');
-	$('#item10').text('-');
+	$('#item10').text(':');
 	$('#item11').text(2);
-	$('#item12').text('+');
+	$('#item12').text('x');
+	$('#item13').text(2);
+	$('#item14').text('=');
+	$('#item16').text('=');
+	$('#item17').css('background-color', '#696969');
+	$('#item18').text('=');
+	$('#item19').css('background-color', '#696969');
+	$('#item20').text('=');
+	$('#item22').text('x');
+	$('#item24').text('=');
+	$('#item25').text(8);
+	
+}
+
+function lvl3_2(){
+	
+	$('#item1').text(50);
+	$('#item2').text(':');
+	$('#item4').text('=');
+	$('#item5').text(10);
+	$('#item6').text(':');
+	$('#item7').css('background-color', '#696969');
+	$('#item8').text(':');
+	$('#item9').css('background-color', '#696969');
+	$('#item10').text(':');
+	$('#item11').text(10);
+	$('#item12').text(':');
 	$('#item13').text(5);
 	$('#item14').text('=');
 	$('#item16').text('=');
@@ -304,20 +348,21 @@ function lvl3(){
 	$('#item18').text('=');
 	$('#item19').css('background-color', '#696969');
 	$('#item20').text('=');
-	$('#item22').text('-');
+	$('#item22').text(':');
 	$('#item24').text('=');
-	$('#item25').text(8);
+	$('#item25').text(5);
 	
 }
 
 
+
 function check(){
-	var it3 = $('#item3').val();
-	var it15 = $('#item15').val();
-	var it21 = $('#item21').val();
-	var it23 = $('#item23').val();
 	
-	console.log(it3+" "+it15);
+	var it3 = $('#text3').val();
+	var it15 = $('#text15').val();
+	var it21 = $('#text21').val();
+	var it23 = $('#text23').val();
+	
 	
 	if(lvl_played == 1){
 		if(it3 == 7 && it15 == 7 && it21 == 10 && it23 == 2){
@@ -335,12 +380,18 @@ function check(){
 				
 			}
 		}
+		else{
+			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
+		}
 	}
 	else if(lvl_played == 12){
 		if(it3 == 3 && it15 == 4 && it21 == 5 && it23 == 2){
 		
 			$('#label1').val('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
-		
+			
+		}
+		else{
+			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
 		}
 	}
 	else if(lvl_played == 2){
@@ -363,16 +414,46 @@ function check(){
 			}
 		
 		}
+		else{
+			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
+		}
 	}
 	else if(lvl_played == 22){
 		if(it3 == 36 && it15 == 39 && it21 == 135 && it23 == 72){
-		
+			
 			$('#label1').val('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
-		
+			
+		}
+		else{
+			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
 		}
 	}
 	else if(lvl_played == 3){
-		
+		if(it3 == 4 && it15 == 4 && it21 == 4 && it23 == 2){
+			if(dif == 3){
+				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
+				lvl_played = 32;
+				clear();
+				lvl3_2();
+			}
+			else if(dif == 5){
+				$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
+				
+			}
+		}
+		else{
+			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
+		}
+	}
+	else if(lvl_played == 32){
+		if(it3 == 5 && it15 == 2 && it21 == 5 && it23 == 1){
+			
+			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
+			
+		}
+		else{
+			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
+		}
 	}
 	
 	
