@@ -123,7 +123,7 @@ h1 {
 <script>
 
 document.getElementById("logout_btn").onclick = function () {
-        location.href = "/unset_sess.php";
+        location.href = "../Menu/unset_sess.php";
 };
 
 document.getElementById("prof_btn").onclick = function () {

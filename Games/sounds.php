@@ -236,6 +236,13 @@ document.getElementById("cont_btn").onclick = function () {
 
 $(document).ready(function(){
 	
+	hide_grid();
+	
+	
+});
+
+function hide_grid(){
+	
 	$('#item1').hide();
 	$('#item2').hide();
 	$('#item3').hide();
@@ -250,10 +257,11 @@ $(document).ready(function(){
 	$('#item12').hide();
 	
 	
-});
+}
 
 function start(){
 	
+	hide_grid();
 	$('#cont').hide();
 	
 	if(lvl_played == 1 || lvl_played == 12){

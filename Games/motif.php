@@ -235,9 +235,11 @@ document.getElementById("cont_btn").onclick = function () {
 
 $(document).ready(function(){
 	
-	
+	$('#clickables').hide();
 	
 });
+
+
 
 function start(){
 	
@@ -245,13 +247,13 @@ function start(){
 	
 	if(lvl_played == 1 || lvl_played == 12){
 		
-		setTimeout(playSound,500,1);
+		setTimeout(playMotif,500,1);
 	}
 	if(lvl_played == 2 || lvl_played == 22){
-		setTimeout(playSound,500,2);
+		setTimeout(playMotif,500,2);
 	}
 	else if(lvl_played == 3 || lvl_played == 32){
-		setTimeout(playSound,500,3);
+		setTimeout(playMotif,500,3);
 	}
 	
 		
@@ -289,6 +291,7 @@ function time_out(){
 	location.href = "../Menu/menu.php";
 }
 
+
 function lvl1(){
 	
 	$('#item1').show();
@@ -304,6 +307,8 @@ function lvl1(){
 	$('#item11').hide();
 	$('#item12').hide();
 	
+	
+	setTimeout(lvl1,5000);
 	
 	counter = 0;
 	time = 30;
@@ -328,6 +333,9 @@ function lvl2(){
 	$('#item11').hide();
 	$('#item12').hide();
 	
+	
+	setTimeout(lvl2,5000);
+	
 	counter = 0;
 	time = 30;
 	interval = setInterval("tiktok()",1000);
@@ -349,24 +357,52 @@ function lvl3(){
 	$('#item11').show();
 	$('#item12').show();
 	
+	
+	setTimeout(lvl2,5000);
+	
 	counter = 0;
 	time = 30;
 	interval = setInterval("tiktok()",1000);
 	
 }
 
+function 
+
+
+
 function playMotif(lvl){
 	
-	var rand=0;
+	var rand1,rand2,rand3,rand4;
+	
+	var randarr = [1,2,3,4,5,6,7,8,9];
+	shuffle(randarr);
+	
 	
 	if(lvl == 1 || lvl == 12){
-		rand = Math.floor((Math.random() * 6) + 1);
+		rand1 = randarr[0];
+		rand2 = randarr[1];
+		
+		$('#item'+rand1).css("backgroundColor", "gray");
+		$('#item'+rand2).css("backgroundColor", "gray");
 	}
 	else if(lvl == 2 || lvl == 22){
-		rand = Math.floor((Math.random() * 9) + 1);
+		rand1 = randarr[0];
+		rand2 = randarr[1];
+		rand3 = randarr[2];
+		$('#item'+rand1).css("backgroundColor", "gray");
+		$('#item'+rand2).css("backgroundColor", "gray");
+		$('#item'+rand3).css("backgroundColor", "gray");
+		
 	}
 	else if(lvl == 3 || lvl == 32){
-		rand = Math.floor((Math.random() * 12) + 1);
+		rand1 = randarr[0];
+		rand2 = randarr[1];
+		rand3 = randarr[2];
+		rand4 = randarr[3];
+		$('#item'+rand1).css("backgroundColor", "gray");
+		$('#item'+rand2).css("backgroundColor", "gray");
+		$('#item'+rand3).css("backgroundColor", "gray");
+		$('#item'+rand4).css("backgroundColor", "gray");
 	}
 	
 	toPlay = playlist[rand-1];
@@ -374,16 +410,19 @@ function playMotif(lvl){
 	
 	toPlay.play();
 	
-	if(lvl == 1 || lvl == 12){
-		setTimeout(lvl1,5000);
-	}
-	else if(lvl == 2 || lvl == 22){
-		setTimeout(lvl2,5000);
-	}
-	else if(lvl == 3 || lvl == 32){
-		setTimeout(lvl3,5000);
-	}
 	
+	
+}
+
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
 }
 
 

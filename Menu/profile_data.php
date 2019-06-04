@@ -73,7 +73,7 @@ $view = '<table cellspacing="15" style="color: #ADFF2F;">
 				<td>'.$edu.'</td>
 			</tr>
 			<tr>
-				<td>ΗΜ/ΝΙΑ ΓΕΝΝΗΣΗΣ: </td>
+				<td>ΔΥΣΚΟΛΙΑ: </td>
 				<td>'.$dif.'</td>
 			</tr>
 		
