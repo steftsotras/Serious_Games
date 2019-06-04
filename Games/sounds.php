@@ -119,6 +119,16 @@ button
     max-height: 100%;
 }
 
+#cont_btn
+{
+	background-color:green;
+	color: black;
+	width: 270px;
+	height: 60px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
 </style>
     
      
@@ -141,6 +151,8 @@ button
 	
 	</div>
 	
+	<div id="cont"><button id="cont_btn" type="button">ΕΚΚΙΝΗΣΗ</button></div>
+	
 	<div class="grid-container" id="clickables">
 	  <div id="item1" class="item1"><img value=1 src="../Images/image_sounds/app.png" id="g1" /></div>
 	  <div id="item2" class="item2"><img value=2 src="../Images/image_sounds/cat.png" id="g1" /></div>
@@ -160,7 +172,6 @@ button
 		<label id="label1"></label>
 	</div>
 	</div>
-	<div><button id="cont_btn" type="button">ΕΚΚΙΝΗΣΗ</button></div>
 	
 	</div>
 	
@@ -202,12 +213,24 @@ var interval = 0;
 
 
 
+if(dif == 1 || dif == 4 || dif == 5){
+	lvl_played = 1;
+}
+if(dif == 2){
+	lvl_played = 2;
+}
+else if(dif == 3){
+	lvl_played = 3;
+}
+	
+
+
 document.getElementById("back_btn").onclick = function () {
     location.href = "../Menu/menu.php";
 };
 
 document.getElementById("cont_btn").onclick = function () {
-    location.href = "../Menu/menu.php";
+    start();
 };
 
 
@@ -231,24 +254,22 @@ $(document).ready(function(){
 
 function start(){
 	
+	$('#cont').hide();
 	
-	if(dif == 1 || dif == 4 || dif == 5){
-		lvl_played = 1;
-		lvl1();
+	if(lvl_played == 1 || lvl_played == 12){
+		
+		setTimeout(playSound,500,1);
 	}
-	if(dif == 2){
-		lvl_played = 2;
-		lvl2();
+	if(lvl_played == 2 || lvl_played == 22){
+		setTimeout(playSound,500,2);
 	}
-	else if(dif == 3){
-		lvl_played = 3;
-		lvl3();
+	else if(lvl_played == 3 || lvl_played == 32){
+		setTimeout(playSound,500,3);
 	}
 	
-	//interval = setInterval("tiktok()",1000);
-	
-	
+		
 }
+
 
 
 function tiktok(){
@@ -296,8 +317,10 @@ function lvl1(){
 	$('#item11').hide();
 	$('#item12').hide();
 	
-	setTimeout(playSound(1),3000);
 	
+	counter = 0;
+	time = 30;
+	interval = setInterval("tiktok()",1000);
 	
 }
 
@@ -318,7 +341,9 @@ function lvl2(){
 	$('#item11').hide();
 	$('#item12').hide();
 	
-	setTimeout(playSound(2),3000);
+	counter = 0;
+	time = 30;
+	interval = setInterval("tiktok()",1000);
 }
 
 
@@ -337,8 +362,9 @@ function lvl3(){
 	$('#item11').show();
 	$('#item12').show();
 	
-	setTimeout(playSound(3),3000);
-	
+	counter = 0;
+	time = 30;
+	interval = setInterval("tiktok()",1000);
 	
 }
 
@@ -346,13 +372,13 @@ function playSound(lvl){
 	
 	var rand=0;
 	
-	if(lvl == 1){
+	if(lvl == 1 || lvl == 12){
 		rand = Math.floor((Math.random() * 6) + 1);
 	}
-	else if(lvl == 2){
+	else if(lvl == 2 || lvl == 22){
 		rand = Math.floor((Math.random() * 9) + 1);
 	}
-	else if(lvl == 3){
+	else if(lvl == 3 || lvl == 32){
 		rand = Math.floor((Math.random() * 12) + 1);
 	}
 	
@@ -360,34 +386,43 @@ function playSound(lvl){
 	numPlayingNow = rand;
 	
 	toPlay.play();
+	
+	if(lvl == 1 || lvl == 12){
+		setTimeout(lvl1,5000);
+	}
+	else if(lvl == 2 || lvl == 22){
+		setTimeout(lvl2,5000);
+	}
+	else if(lvl == 3 || lvl == 32){
+		setTimeout(lvl3,5000);
+	}
+	
 }
 
 
 $('#clickables').on('click', 'img', function(e) {
    var clicked = $(e.target).attr('value');
-   
+   check(clicked);
       
 });
 
 
-function check(){
+function check(clicked){
 	
-	var it3 = 0;
-	var it15 = 0;
-	var it21 = 0;
-	var it23 = 0;
 	
 	if(lvl_played == 1){
-		if(it3 == 7 && it15 == 7 && it21 == 10 && it23 == 2){
+		if(clicked == numPlayingNow){
 			if(dif == 1){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ, ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
 				lvl_played = 12;
-				lvl1();
+				clearInterval(interval);
+				start();
 			}
 			else if(dif == 4 || 5){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ ΔΟΚΙΜΑΣΙΑ ΑΝΕΒΑΙΝΕΙΣ ΕΠΙΠΕΔΟ');
 				lvl_played = 2;
-				lvl2();
+				clearInterval(interval);
+				start();
 				
 			}
 		}
@@ -396,23 +431,22 @@ function check(){
 		}
 	}
 	else if(lvl_played == 12){
-		if(it3 == 3 && it15 == 4 && it21 == 5 && it23 == 2){
+		if(clicked == numPlayingNow){
 		
 			clearInterval(interval);
 			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(10));
 		}
 		else{
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
-			clear();
 		}
 	}
 	else if(lvl_played == 2){
-		if(it3 == 18 && it15 == 24 && it21 == 30 && it23 == 12){
+		if(clicked == numPlayingNow){
 			if(dif == 2){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ, ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
 				lvl_played = 22;
-				clear();
-				lvl2();
+				clearInterval(interval);
+				start();
 			}
 			else if(dif == 4){
 				clearInterval(interval);
@@ -421,18 +455,17 @@ function check(){
 			else if(dif == 5){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ ΔΟΚΙΜΑΣΙΑ ΑΝΕΒΑΙΝΕΙΣ ΕΠΙΠΕΔΟ');
 				lvl_played = 3;
-				clear();
-				lvl3();
+				clearInterval(interval);
+				start();
 			}
 		
 		}
 		else{
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
-			clear();
 		}
 	}
 	else if(lvl_played == 22){
-		if(it3 == 36 && it15 == 39 && it21 == 135 && it23 == 72){
+		if(clicked == numPlayingNow){
 			
 			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
 			clearInterval(interval);
@@ -441,16 +474,15 @@ function check(){
 		}
 		else{
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
-			clear();
 		}
 	}
 	else if(lvl_played == 3){
-		if(it3 == 4 && it15 == 4 && it21 == 4 && it23 == 2){
+		if(clicked == numPlayingNow){
 			if(dif == 3){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
 				lvl_played = 32;
-				clear();
-				lvl3();
+				clearInterval(interval);
+				start();
 			}
 			else if(dif == 5){
 				clearInterval(interval);
@@ -459,11 +491,10 @@ function check(){
 		}
 		else{
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
-			clear();
 		}
 	}
 	else if(lvl_played == 32){
-		if(it3 == 5 && it15 == 2 && it21 == 5 && it23 == 1){
+		if(clicked == numPlayingNow){
 				
 			clearInterval(interval);
 			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(40));
@@ -471,21 +502,12 @@ function check(){
 		}
 		else{
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
-			clear();
 		}
 	}
 	
 	
 }
 
-
-function clear(){
-	$('#text3').val("");
-	$('#text15').val("");
-	$('#text21').val("");
-	$('#text23').val("");
-	
-}
 
 function points(p){
 	
