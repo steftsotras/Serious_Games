@@ -32,14 +32,14 @@ h1 {
 	position: absolute;
 }
 
-#g1{
+.images{
     height: auto; 
     width: auto; 
     max-width: 250px; 
-    max-height: 250;
+    max-height: 250px;
 }
 
-#g1{
+.images{
 	border: 2px solid red;
 	border-radius: 15px;
 	padding: 10px;
@@ -53,8 +53,37 @@ h1 {
 	
 }
 
+#logout_btn
+{
+	background-color: red;
+	color: bold black;
+	width: 270px;
+	height: 60px;
+	font-size: 20px;
+	cursor: pointer;
+}
 
+#prof_btn
+{
+	background-color: purple;
+	color: black;
+	width: 270px;
+	height: 60px;
+	font-size: 20px;
+	cursor: pointer;
+}
 
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3,0fr);
+  grid-gap: 50px;
+  padding: 10px;
+}
+
+#center{
+	width: 537px;
+	margin: 0px auto;
+}
 
 
 </style>
@@ -69,11 +98,23 @@ h1 {
 			<h1><?php echo $_SESSION['username'];?> ΔΙΑΛΕΞΕ ΠΑΙΧΝΙΔΙ</h1>
 		</div>
 		<br>
-		<div align="center">
-			<div id= "sub">
-				<img src="../Images/ypologismos.png" id="g1" />
-			</div>
-		<div>
+		<div id="center">
+		<div class="grid-container">
+			
+			<div id="sub"><img src="../Images/ypologismos.png" class="images" id="g1" /></div>
+			<div id="sub"><img src="../Images/sounds.png" class="images" id="g2" /></div>
+			
+		</div>
+		</div>
+		<br>
+		<br>
+		
+		<div id="btns">
+			<button id="prof_btn" type="button">ΡΥΘΜΙΣΕΙΣ ΠΡΟΦΙΛ</button>
+			<button id="logout_btn" type="button">ΑΠΟΣΥΝΔΕΣΗ</button>
+		</div>
+		
+		
 	</div>
 	</body>
 	
@@ -81,8 +122,20 @@ h1 {
 
 <script>
 
+document.getElementById("logout_btn").onclick = function () {
+        location.href = "/unset_sess.php";
+};
+
+document.getElementById("prof_btn").onclick = function () {
+        location.href = "../Menu/profile.php";
+};
+
 document.getElementById("g1").onclick = function () {
         location.href = "../Games/calculations.php";
+};
+
+document.getElementById("g2").onclick = function () {
+        location.href = "../Games/sounds.php";
 };
 
 $(document).ready(function(){

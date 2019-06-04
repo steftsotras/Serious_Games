@@ -15,7 +15,7 @@ if(!isset($_SESSION['username'])){
 <style>       
 
 #container {
-	width: 100%;
+	width: 90%;
 	text-align:center;
 	position: absolute;
 }
@@ -38,7 +38,6 @@ h1 {
 
 #btns{
 	margin: 0px auto;
-	
 	
 }
 
@@ -93,11 +92,37 @@ button
 	cursor: pointer;
 }
 
+#back_bton{
+    float: left;
+	margin-top:30px
+}
+
+
 #label1{
 	background-color: #ffa31a;
 	color: black;
-	font-size: 30px;
+	font-size: 20px;
+	width:100%;
+}
+
+#timer{
+	font-size: 50px;
+	color: #D2691E;
+	width: 100px;
+}
+
+#wrapper {
+    width: 600px;
+	height:120px;
+    overflow: hidden; /* will contain if #first is longer than #second */
 	
+}
+
+#time {
+	margin-right:50px;
+	margin-left:47px;
+    width: 170px;
+    float:left; /* add this */
 }
 
 </style>
@@ -112,13 +137,16 @@ button
 	<div align="center" style="margin: 0px auto;">
 		<h1>ΠΑΙΧΝΙΔΙ ΥΠΟΛΟΓΙΣΜΟΣ</h1>
 	</div>
+	
+	
 	<div id="center">
 	
-	<div>
-		<button id="back_btn" type="button">ΠΙΣΩ ΣΤΟ ΜΕΝΟΥ</button>
-		
+	
+	<div id="wrapper">
+		<div id="time"><b><p id="timer">01:30</p></b></div>
+		<div id="back_bton"><button id="back_btn" type="button">ΠΙΣΩ ΣΤΟ ΜΕΝΟΥ</button></div>
+	
 	</div>
-	<br>
 	
 	<div class="grid-container">
 	  <div id="item1" class="item1"></div>
@@ -148,17 +176,18 @@ button
 	  <div id="item25" class="item25"></div>  	  
 	</div>
 	<br>
+	<div>
+		<label id="label1"></label>
+	</div>
 	</div>
 	<div id="btns">
-	<button id="check_btn" type="button">ΕΛΕΓΧΟΣ</button>
-	<button id="clear_btn" type="button">ΚΑΘΑΡΙΣΜΟΣ</button>
-	</div>
-	<br>
-	<div>
-	<label id="label1"></label>
+		<button id="check_btn" type="button">ΕΛΕΓΧΟΣ</button>
+		<button id="clear_btn" type="button">ΚΑΘΑΡΙΣΜΟΣ</button>
 	</div>
 	
+	
 	</div>
+	
 	</body>
 	
 </html>
@@ -168,6 +197,9 @@ button
 
 var lvl_played;
 var dif = <?php echo $_SESSION['dif'];?>;
+var counter = 0;
+var time = 90;
+var interval = 0;
 
 document.getElementById("clear_btn").onclick = function () {
     clear();
@@ -183,6 +215,8 @@ document.getElementById("check_btn").onclick = function () {
 
 $(document).ready(function(){
 	
+	
+	
 	if(dif == 1 || dif == 4 || dif == 5){
 		lvl_played = 1;
 		lvl1();
@@ -195,7 +229,41 @@ $(document).ready(function(){
 		lvl_played = 3;
 		lvl3();
 	}
+	
+	interval = setInterval("tiktok()",1000);
+	
 });
+
+
+function tiktok(){
+	
+	if(counter == time){
+		time_out();
+	}
+	
+	counter++;
+	var timeleft = time - counter;
+	var min = Math.floor(timeleft/60);
+	var sec = timeleft % 60;
+	
+	
+	if(sec >= 10){
+		
+		$('#timer').html("0"+min+":"+sec);
+	}
+	else{
+		$('#timer').html("0"+min+":0"+sec);
+	}
+	
+	
+}
+
+function time_out(){
+	
+	clearInterval(interval);
+	alert("ΤΕΛΙΩΣΕ Ο ΧΡΟΝΟΣ!");
+	location.href = "../Menu/menu.php";
+}
 
 function lvl1(){
 	
@@ -367,13 +435,13 @@ function check(){
 	if(lvl_played == 1){
 		if(it3 == 7 && it15 == 7 && it21 == 10 && it23 == 2){
 			if(dif == 1){
-				$('#label1').val('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ, ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
+				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ, ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
 				lvl_played = 12;
 				clear();
 				lvl1_2();
 			}
 			else if(dif == 4 || 5){
-				$('#label1').val('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ ΔΟΚΙΜΑΣΙΑ ΑΝΕΒΑΙΝΕΙΣ ΕΠΙΠΕΔΟ');
+				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ ΔΟΚΙΜΑΣΙΑ ΑΝΕΒΑΙΝΕΙΣ ΕΠΙΠΕΔΟ');
 				lvl_played = 2;
 				clear();
 				lvl2();
@@ -382,32 +450,34 @@ function check(){
 		}
 		else{
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
+			clear();
 		}
 	}
 	else if(lvl_played == 12){
 		if(it3 == 3 && it15 == 4 && it21 == 5 && it23 == 2){
 		
-			$('#label1').val('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
-			
+			clearInterval(interval);
+			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(10));
 		}
 		else{
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
+			clear();
 		}
 	}
 	else if(lvl_played == 2){
 		if(it3 == 18 && it15 == 24 && it21 == 30 && it23 == 12){
 			if(dif == 2){
-				$('#label1').val('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ, ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
+				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ, ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
 				lvl_played = 22;
 				clear();
 				lvl2_2();
 			}
 			else if(dif == 4){
-				$('#label1').val('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
-				
+				clearInterval(interval);
+			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(30));
 			}
 			else if(dif == 5){
-				$('#label1').val('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ ΔΟΚΙΜΑΣΙΑ ΑΝΕΒΑΙΝΕΙΣ ΕΠΙΠΕΔΟ');
+				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ ΔΟΚΙΜΑΣΙΑ ΑΝΕΒΑΙΝΕΙΣ ΕΠΙΠΕΔΟ');
 				lvl_played = 3;
 				clear();
 				lvl3();
@@ -416,16 +486,20 @@ function check(){
 		}
 		else{
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
+			clear();
 		}
 	}
 	else if(lvl_played == 22){
 		if(it3 == 36 && it15 == 39 && it21 == 135 && it23 == 72){
 			
-			$('#label1').val('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
+			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
+			clearInterval(interval);
+			points(20);
 			
 		}
 		else{
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
+			clear();
 		}
 	}
 	else if(lvl_played == 3){
@@ -437,22 +511,25 @@ function check(){
 				lvl3_2();
 			}
 			else if(dif == 5){
-				$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
-				
+				clearInterval(interval);
+			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(70));
 			}
 		}
 		else{
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
+			clear();
 		}
 	}
 	else if(lvl_played == 32){
 		if(it3 == 5 && it15 == 2 && it21 == 5 && it23 == 1){
-			
-			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
+				
+			clearInterval(interval);
+			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(40));
 			
 		}
 		else{
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
+			clear();
 		}
 	}
 	
@@ -468,6 +545,10 @@ function clear(){
 	
 }
 
+function points(p){
+	
+ 	return point = Math.round(p * (1-(counter/time)));
+}
 
 </script>
 

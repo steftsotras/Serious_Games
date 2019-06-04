@@ -265,7 +265,6 @@ function get_data(){
 }
 
 function post_data(json_data){
-	console.log(json_data);
 	
 	$.post('change_settings.php',json_data,function(data){get_data();});
 	
