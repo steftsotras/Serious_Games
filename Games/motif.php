@@ -52,8 +52,8 @@ h1 {
 
 
 .grid-container > div {
-  border-radius: 25px;
-  border: 3px solid #73AD21;
+  /*border-radius: 25px;
+  border: 3px solid #73AD21;*/
   background-color: #FFFACD;
   cursor: pointer;
 }
@@ -183,29 +183,7 @@ button
 <script>
 
 
-var audio1 = new Audio('../Images/image_sounds/applause_audio.mp3');
-var audio2 = new Audio('../Images/image_sounds/Cat_audio.mp3');
-var audio3 = new Audio('../Images/image_sounds/crow_audio.mp3');
-var audio4 = new Audio('../Images/image_sounds/Drums_audio.mp3');
-var audio5 = new Audio('../Images/image_sounds/guitar_audio.mp3');
-var audio6 = new Audio('../Images/image_sounds/horse_audio.mp3');
-var audio7 = new Audio('../Images/image_sounds/Keyboard_audio.mp3');
-var audio8 = new Audio('../Images/image_sounds/Printer_audio.mp3');
-var audio9 = new Audio('../Images/image_sounds/saxophone_audio.mp3');
-var audio10 = new Audio('../Images/image_sounds/train_audio.mp3');
-var audio11 = new Audio('../Images/image_sounds/snake_audio.wav');
-var audio12 = new Audio('../Images/image_sounds/telephone_audio.mp3');
-
-
-
-var toPlay = new Audio();
-
-var playlist = new Array(audio1,audio2,audio3,audio4,audio5,audio6,audio7,audio8,audio9,audio10,audio11,audio12);
-var numPlayingNow = 0;
-
-var rand1,rand2,rand3,rand4;
-
-var lvl_played;
+var lvl_played_played;
 var dif = <?php echo $_SESSION['dif'];?>;
 var counter = 0;
 var time = 30;
@@ -215,13 +193,13 @@ var currmotif=[];
 
 
 if(dif == 1 || dif == 4 || dif == 5){
-	lvl_played = 1;
+	lvl_played_played = 1;
 }
 if(dif == 2){
-	lvl_played = 2;
+	lvl_played_played = 2;
 }
 else if(dif == 3){
-	lvl_played = 3;
+	lvl_played_played = 3;
 }
 	
 
@@ -314,19 +292,8 @@ function starting_game(){
 function start(){
 	
 	$('#cont').hide();
+	setTimeout(playMotif,700);
 	
-	if(lvl_played == 1 || lvl_played == 12){
-		
-		setTimeout(playMotif,500,1);
-	}
-	if(lvl_played == 2 || lvl_played == 22){
-		setTimeout(playMotif,500,2);
-	}
-	else if(lvl_played == 3 || lvl_played == 32){
-		setTimeout(playMotif,500,3);
-	}
-	
-		
 }
 
 
@@ -364,40 +331,39 @@ function time_out(){
 
 
 
-
-
-function playMotif(lvl){
-	
+function playMotif(){
 	
 	var randarr = [1,2,3,4,5,6,7,8,9];
 	shuffle(randarr);
 	
 	
-	if(lvl == 1 || lvl == 12){
-		rand1 = randarr[0];
-		rand2 = randarr[1];
+	if(lvl_played == 1 || lvl_played == 12){
+		currmotif[0] = randarr[0];
+		currmotif[1] = randarr[1];
 		
-		$('#item'+rand1).css("backgroundColor", "gray");
-		$('#item'+rand2).css("backgroundColor", "gray");
+		$('#item'+currmotif[0]).css("backgroundColor", "gray");
+		$('#item'+currmotif[1]).css("backgroundColor", "gray");
 	}
-	else if(lvl == 2 || lvl == 22){
-		rand1 = randarr[0];
-		rand2 = randarr[1];
-		rand3 = randarr[2];
-		$('#item'+rand1).css("backgroundColor", "gray");
-		$('#item'+rand2).css("backgroundColor", "gray");
-		$('#item'+rand3).css("backgroundColor", "gray");
+	else if(lvl_played == 2 || lvl_played == 22){
+		currmotif[0] = randarr[0];
+		currmotif[1] = randarr[1];
+		currmotif[2] = randarr[2];
+		
+		$('#item'+currmotif[0]).css("backgroundColor", "gray");
+		$('#item'+currmotif[1]).css("backgroundColor", "gray");
+		$('#item'+currmotif[2]).css("backgroundColor", "gray");
 		
 	}
-	else if(lvl == 3 || lvl == 32){
-		rand1 = randarr[0];
-		rand2 = randarr[1];
-		rand3 = randarr[2];
-		rand4 = randarr[3];
-		$('#item'+rand1).css("backgroundColor", "gray");
-		$('#item'+rand2).css("backgroundColor", "gray");
-		$('#item'+rand3).css("backgroundColor", "gray");
-		$('#item'+rand4).css("backgroundColor", "gray");
+	else if(lvl_played == 3 || lvl_played == 32){
+		currmotif[0] = randarr[0];
+		currmotif[1] = randarr[1];
+		currmotif[2] = randarr[2];
+		currmotif[3] = randarr[3];
+		
+		$('#item'+currmotif[0]).css("backgroundColor", "gray");
+		$('#item'+currmotif[1]).css("backgroundColor", "gray");
+		$('#item'+currmotif[2]).css("backgroundColor", "gray");
+		$('#item'+currmotif[3]).css("backgroundColor", "gray");
 	}
 	
 	setTimeout(starting_game,3000);
@@ -428,20 +394,32 @@ $('#clickables').on('click', 'div', function(e) {
 });
 
 
+function arraysEqual(arr1, arr2) {
+    if(arr1.length !== arr2.length)
+        return false;
+    for(var i = arr1.length; i--;) {
+        if(arr1[i] !== arr2[i])
+            return false;
+    }
+
+    return true;
+}
+
+
 function check(clicked){
 	
 	
-	if(lvl_played == 1){
+	if(lvl_played_played == 1){
 		if(clicked == numPlayingNow){
 			if(dif == 1){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ, ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
-				lvl_played = 12;
+				lvl_played_played = 12;
 				clearInterval(interval);
 				start();
 			}
 			else if(dif == 4 || 5){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ ΔΟΚΙΜΑΣΙΑ ΑΝΕΒΑΙΝΕΙΣ ΕΠΙΠΕΔΟ');
-				lvl_played = 2;
+				lvl_played_played = 2;
 				clearInterval(interval);
 				start();
 				
@@ -451,7 +429,7 @@ function check(clicked){
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
 		}
 	}
-	else if(lvl_played == 12){
+	else if(lvl_played_played == 12){
 		if(clicked == numPlayingNow){
 		
 			clearInterval(interval);
@@ -461,11 +439,11 @@ function check(clicked){
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
 		}
 	}
-	else if(lvl_played == 2){
+	else if(lvl_played_played == 2){
 		if(clicked == numPlayingNow){
 			if(dif == 2){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ, ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
-				lvl_played = 22;
+				lvl_played_played = 22;
 				clearInterval(interval);
 				start();
 			}
@@ -475,7 +453,7 @@ function check(clicked){
 			}
 			else if(dif == 5){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ ΔΟΚΙΜΑΣΙΑ ΑΝΕΒΑΙΝΕΙΣ ΕΠΙΠΕΔΟ');
-				lvl_played = 3;
+				lvl_played_played = 3;
 				clearInterval(interval);
 				start();
 			}
@@ -485,7 +463,7 @@ function check(clicked){
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
 		}
 	}
-	else if(lvl_played == 22){
+	else if(lvl_played_played == 22){
 		if(clicked == numPlayingNow){
 			
 			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
@@ -497,11 +475,11 @@ function check(clicked){
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
 		}
 	}
-	else if(lvl_played == 3){
+	else if(lvl_played_played == 3){
 		if(clicked == numPlayingNow){
 			if(dif == 3){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
-				lvl_played = 32;
+				lvl_played_played = 32;
 				clearInterval(interval);
 				start();
 			}
@@ -514,7 +492,7 @@ function check(clicked){
 			$('#label1').html('ΛΑΘΟΣ! ΞΑΝΑΠΡΟΣΠΑΘΗΣΕ');
 		}
 	}
-	else if(lvl_played == 32){
+	else if(lvl_played_played == 32){
 		if(clicked == numPlayingNow){
 				
 			clearInterval(interval);

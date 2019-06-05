@@ -75,7 +75,7 @@ h1 {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(3,0fr);
+  grid-template-columns: repeat(2,1fr);
   grid-gap: 50px;
   padding: 10px;
 }
@@ -103,6 +103,7 @@ h1 {
 			
 			<div id="sub"><img src="../Images/ypologismos.png" class="images" id="g1" /></div>
 			<div id="sub"><img src="../Images/sounds.png" class="images" id="g2" /></div>
+			<div id="sub"><img src="../Images/motif.png" class="images" id="g3" /></div>
 			
 		</div>
 		</div>
@@ -137,6 +138,11 @@ document.getElementById("g1").onclick = function () {
 document.getElementById("g2").onclick = function () {
         location.href = "../Games/sounds.php";
 };
+
+document.getElementById("g3").onclick = function () {
+        location.href = "../Games/motif.php";
+};
+
 
 $(document).ready(function(){
     
