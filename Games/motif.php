@@ -203,6 +203,8 @@ var toPlay = new Audio();
 var playlist = new Array(audio1,audio2,audio3,audio4,audio5,audio6,audio7,audio8,audio9,audio10,audio11,audio12);
 var numPlayingNow = 0;
 
+var rand1,rand2,rand3,rand4;
+
 var lvl_played;
 var dif = <?php echo $_SESSION['dif'];?>;
 var counter = 0;
@@ -229,17 +231,85 @@ document.getElementById("back_btn").onclick = function () {
 };
 
 document.getElementById("cont_btn").onclick = function () {
-    start();
+    show_grid()
+	start();
 };
 
 
 $(document).ready(function(){
 	
-	$('#clickables').hide();
+	hide_grid();
 	
 });
 
 
+function hide_grid(){
+	
+	$('#item1').hide();
+	$('#item2').hide();
+	$('#item3').hide();
+	$('#item4').hide();
+	$('#item5').hide();
+	$('#item6').hide();
+	$('#item7').hide();
+	$('#item8').hide();
+	$('#item9').hide();
+	$('#item10').hide();
+	$('#item11').hide();
+	$('#item12').hide();
+	
+	
+}
+
+function show_grid(){
+	
+	$('#item1').show();
+	$('#item2').show();
+	$('#item3').show();
+	$('#item4').show();
+	$('#item5').show();
+	$('#item6').show();
+	$('#item7').show();
+	$('#item8').show();
+	$('#item9').show();
+	$('#item10').show();
+	$('#item11').show();
+	$('#item12').show();
+	
+}
+
+function initial_background(){
+	
+	$('#item1').css("backgroundColor", "#FFFACD");
+	$('#item2').css("backgroundColor", "#FFFACD");
+	$('#item3').css("backgroundColor", "#FFFACD");
+	$('#item4').css("backgroundColor", "#FFFACD");
+	$('#item5').css("backgroundColor", "#FFFACD");
+	$('#item6').css("backgroundColor", "#FFFACD");
+	$('#item7').css("backgroundColor", "#FFFACD");
+	$('#item8').css("backgroundColor", "#FFFACD");
+	$('#item9').css("backgroundColor", "#FFFACD");
+	$('#item10').css("backgroundColor", "#FFFACD");
+	$('#item11').css("backgroundColor", "#FFFACD");
+	$('#item12').css("backgroundColor", "#FFFACD");
+	
+	
+}
+
+function resetClock(){
+	
+	counter = 0;
+	time = 30;
+	interval = setInterval("tiktok()",1000);
+	
+}
+
+function starting_game(){
+	
+	initial_background();
+	resetClock();
+	
+}
 
 function start(){
 	
@@ -284,6 +354,7 @@ function tiktok(){
 	
 }
 
+
 function time_out(){
 	
 	clearInterval(interval);
@@ -292,87 +363,11 @@ function time_out(){
 }
 
 
-function lvl1(){
-	
-	$('#item1').show();
-	$('#item2').show();
-	$('#item3').show();
-	$('#item4').show();
-	$('#item5').show();
-	$('#item6').show();
-	$('#item7').hide();
-	$('#item8').hide();
-	$('#item9').hide();
-	$('#item10').hide();
-	$('#item11').hide();
-	$('#item12').hide();
-	
-	
-	setTimeout(lvl1,5000);
-	
-	counter = 0;
-	time = 30;
-	interval = setInterval("tiktok()",1000);
-	
-}
-
-
-
-function lvl2(){
-	
-	$('#item1').show();
-	$('#item2').show();
-	$('#item3').show();
-	$('#item4').show();
-	$('#item5').show();
-	$('#item6').show();
-	$('#item7').show();
-	$('#item8').show();
-	$('#item9').show();
-	$('#item10').hide();
-	$('#item11').hide();
-	$('#item12').hide();
-	
-	
-	setTimeout(lvl2,5000);
-	
-	counter = 0;
-	time = 30;
-	interval = setInterval("tiktok()",1000);
-}
-
-
-function lvl3(){
-	
-	$('#item1').show();
-	$('#item2').show();
-	$('#item3').show();
-	$('#item4').show();
-	$('#item5').show();
-	$('#item6').show();
-	$('#item7').show();
-	$('#item8').show();
-	$('#item9').show();
-	$('#item10').show();
-	$('#item11').show();
-	$('#item12').show();
-	
-	
-	setTimeout(lvl2,5000);
-	
-	counter = 0;
-	time = 30;
-	interval = setInterval("tiktok()",1000);
-	
-}
-
-function 
 
 
 
 function playMotif(lvl){
 	
-	var rand1,rand2,rand3,rand4;
 	
 	var randarr = [1,2,3,4,5,6,7,8,9];
 	shuffle(randarr);
@@ -405,14 +400,11 @@ function playMotif(lvl){
 		$('#item'+rand4).css("backgroundColor", "gray");
 	}
 	
-	toPlay = playlist[rand-1];
-	numPlayingNow = rand;
-	
-	toPlay.play();
-	
+	setTimeout(starting_game,3000);
 	
 	
 }
+
 
 function shuffle(a) {
     var j, x, i;
@@ -432,9 +424,7 @@ $('#clickables').on('click', 'div', function(e) {
    
    if(clicked.length == currmotif.length){
 	   //check(clicked);
-   }
-   
-      
+   }  
 });
 
 
