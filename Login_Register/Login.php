@@ -18,8 +18,7 @@
     $result = mysqli_query($link, $sql) or die(mysqli_error($link));
     $count = mysqli_num_rows($result);
 
-    if ($count == 1) {
-        $row = mysqli_fetch_assoc($result);
+    if ($count >= 1) {
 		
 		$_SESSION['username'] = $username;
 		

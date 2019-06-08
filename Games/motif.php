@@ -494,9 +494,9 @@ function check(clicked){
 	else if(lvl_played == 22){
 		if(arraysEqual(clicked, currmotif)){
 			
-			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
 			clearInterval(interval);
-			points(20);
+			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(20));
+			
 			
 		}
 		else{
@@ -513,7 +513,7 @@ function check(clicked){
 			}
 			else if(dif == 5){
 				clearInterval(interval);
-			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(70));
+				$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(70));
 			}
 		}
 		else{

@@ -475,7 +475,7 @@ function check(clicked){
 	else if(lvl_played == 22){
 		if(clicked == numPlayingNow){
 			
-			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ');
+			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(20));
 			clearInterval(interval);
 			points(20);
 			

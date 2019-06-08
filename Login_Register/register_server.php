@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && (isset($_POST['submit'])) && ($_POST
         echo "empty username pass";
         echo "</div></center>";
 		
-        header("Location: register.php");
+        header("Location: ../Login_Register/register.html");
         exit();
     }
 	

@@ -217,7 +217,7 @@ color: #ffa31a;
 
 
 document.getElementById("logout_btn").onclick = function () {
-        location.href = "/unset_sess.php";
+        location.href = "../Menu/unset_sess.php";
 };
 
 document.getElementById("cont_btn").onclick = function () {
@@ -259,7 +259,7 @@ function get_data(){
 		success:function(data){  
 			
 			$('#live_data').html(data); 
-			 
+			
 		}  
 	}); 
 }
