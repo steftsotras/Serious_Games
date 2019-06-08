@@ -209,7 +209,7 @@ document.getElementById("back_btn").onclick = function () {
 };
 
 document.getElementById("cont_btn").onclick = function () {
-    show_grid()
+    show_grid();
 	start();
 };
 
@@ -394,9 +394,6 @@ $('#clickables').on('click', 'div', function(e) {
 	   
    }
    
-   
-   console.log(clicked);
-   console.log(currmotif);
    
    if(clicked.length == currmotif.length){
 	   check(clicked);

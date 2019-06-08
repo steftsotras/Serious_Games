@@ -477,7 +477,6 @@ function check(clicked){
 			
 			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(20));
 			clearInterval(interval);
-			points(20);
 			
 		}
 		else{

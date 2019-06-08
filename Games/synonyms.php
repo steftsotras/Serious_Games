@@ -53,7 +53,6 @@ h1 {
 
 .grid-container > div {
   border-radius: 25px;
-  border: 3px solid #73AD21;
   
   background-color: #FFFACD;
   cursor: pointer;
@@ -129,13 +128,13 @@ button
 
 #cont_btn
 {
-	display:none;
 	background-color:green;
 	color: black;
 	width: 270px;
 	height: 60px;
 	font-size: 20px;
 	cursor: pointer;
+	display:none;
 }
 
 .block
@@ -172,7 +171,7 @@ button
 	
 	<div id="cont"><button id="cont_btn" type="button">ΕΚΚΙΝΗΣΗ</button></div>
 	
-	
+	<div id ="game">
 	<div class="block">
 	
 	<label class="labels" id="first_label">Βρες το</label>
@@ -203,7 +202,7 @@ button
 	</div>
 	
 	</div>
-	
+	</div>
 	<br>
 	
 	<div>
@@ -233,15 +232,28 @@ var clicked=[];
 var currmotif=[];
 
 var synToUse = [['Αβέβαιος','Απέριττος','Ανώφελος','Αχρηστος','Σύνθετος','Αποκρύπτω'],
-['Βοήθεια','Απέριττος','Ανώφελος','Αχρηστος','Σύνθετος','Αποκρύπτω'],
+['Βοήθεια','Μεμονομένα','Χρήσιμα','Επιβεβαίωση','Εγκώμιο','Αξία'],
 ['Γνώση','Λήψη','Σήμα','Καθοδήγηση','Αναλγησία','Έμπνευση']];
+
 var syn      = ['Ασταθής','Ενίσχυση','Αντίληψη'];
+
 var antToUse = [['Ησυχία','Ύπαρξη','Θόρυβος','Ένταση','Δυνατός','Θρόμβος'],
 ['Κατηγορία','Ανυπαρξία','Υπόσταση','Καθυστερημένα','Εμπιστοσύνη','Ποικιλογνωμία'],
 ['Μαζικός','Μάζα','Αμφιβολία','Πολυσύνθετος','Μόνος','Έρημος']];
+
 var ant      = ['Φασαρία','Υπεράσπιση','Ατομικός'];
 
 
+var currsyn = [];
+var currwords = [];
+var currant = [];
+var word;
+var prevrand = 0;
+var rand = 0;
+var clickeda = false;
+var clickedb = false;
+var clickedta;
+var clickedtb;
 
 if(dif == 1 || dif == 4 || dif == 5){
 	lvl_played = 1;
@@ -261,37 +273,25 @@ document.getElementById("back_btn").onclick = function () {
 
 document.getElementById("cont_btn").onclick = function () {
     show_grid()
-	start();
+	//start();
 };
 
 
 $(document).ready(function(){
 	
 	//hide_grid();
-	
+	lvl1();
 });
 
 
 function hide_grid(){
-	
-	$('#item1').hide();
-	$('#item2').hide();
-	$('#item3').hide();
-	$('#item4').hide();
-	$('#item5').hide();
-	$('#item6').hide();
-	
+	$('#game').hide();
 	
 }
 
 function show_grid(){
 	
-	$('#item1').show();
-	$('#item2').show();
-	$('#item3').show();
-	$('#item4').show();
-	$('#item5').show();
-	$('#item6').show();
+	$('#game').show();
 	
 }
 
@@ -364,13 +364,112 @@ function time_out(){
 }
 
 
+function lvl1(){
+	
+	getSyn();
+	$('#first_label').text("Βρες το συνώνυμο της λέξης "+word);
+	
+	$('#item6').text(currwords[0]);
+	$('#item1').text(currwords[1]);
+	$('#item2').text(currwords[2]);
+	$('#item3').text(currwords[3]);
+	$('#item4').text(currwords[4]);
+	$('#item5').text(currwords[5]);
+	
+	
+	getSyn();
+	$('#second_label').text("Βρες το συνώνυμο της λέξης "+word);
+	
+	$('#item26').text(currwords[0]);
+	$('#item21').text(currwords[1]);
+	$('#item22').text(currwords[2]);
+	$('#item23').text(currwords[3]);
+	$('#item24').text(currwords[4]);
+	$('#item25').text(currwords[5]);
+}
+
+function lvl2(){
+	
+	getAnt();
+	$('#first_label').text("Βρες το αντώνυμο της λέξης "+word);
+	
+	$('#item6').text(currwords[0]);
+	$('#item1').text(currwords[1]);
+	$('#item2').text(currwords[2]);
+	$('#item3').text(currwords[3]);
+	$('#item4').text(currwords[4]);
+	$('#item5').text(currwords[5]);
+	
+	
+	getAnt();
+	$('#second_label').text("Βρες το αντώνυμο της λέξης "+word);
+	
+	$('#item26').text(currwords[0]);
+	$('#item21').text(currwords[1]);
+	$('#item22').text(currwords[2]);
+	$('#item23').text(currwords[3]);
+	$('#item24').text(currwords[4]);
+	$('#item25').text(currwords[5]);
+}
+
+function lvl3(){
+	
+	getSyn();
+	$('#first_label').text("Βρες το συνώνυμο της λέξης "+word);
+	
+	$('#item6').text(currwords[0]);
+	$('#item1').text(currwords[1]);
+	$('#item2').text(currwords[2]);
+	$('#item3').text(currwords[3]);
+	$('#item4').text(currwords[4]);
+	$('#item5').text(currwords[5]);
+	
+	
+	getAnt();
+	$('#second_label').text("Βρες το αντώνυμο της λέξης "+word);
+	
+	$('#item26').text(currwords[0]);
+	$('#item21').text(currwords[1]);
+	$('#item22').text(currwords[2]);
+	$('#item23').text(currwords[3]);
+	$('#item24').text(currwords[4]);
+	$('#item25').text(currwords[5]);
+}
+
 
 function getSyn(){
 	
+	while(rand == prevrand){
+		 rand = Math.floor((Math.random() * 3));
+	}
+	prevrand = rand;
+	
+	currwords = [];
+	
+	currwords = [...synToUse[rand]];
+	currsyn[currsyn.length] = syn[rand];
+	
+	word = currwords[0];
+	currwords[0] = syn[rand];
+	shuffle(currwords);
+}
+
+function getAnt(){
+	
+	while(rand == prevrand){
+		 rand = Math.floor((Math.random() * 3));
+	}
+	prevrand = rand;
+	
 	rand = Math.floor((Math.random() * 3));
 	
-	currsyn[currsyn.length] += 
+	currwords = [...antToUse[rand]];
+	currant[currsyn.length] = ant[rand];
 	
+	word = currwords[0];
+	currwords[0] = ant[rand];
+	
+	shuffle(currwords);
 }
 
 
@@ -437,14 +536,61 @@ $('#clickables').on('click', 'div', function(e) {
    }
    
    
-   console.log(clicked);
-   console.log(currmotif);
-   
    if(clicked.length == currmotif.length){
 	   check(clicked);
    }  
 });
 
+
+$('#first').on('click', 'div', function(e) {
+   if(!clickeda){
+	    $(e.target).css("backgroundColor", "gray");
+		clickedta = $(e.target).text();
+		clickeda = true;
+		prevclicka = $(e.target);
+   }
+   else{
+	   prevclicka.css("backgroundColor", "#FFFACD");
+	   $(e.target).css("backgroundColor", "gray");
+	   clickedta = $(e.target).text();
+	   prevclicka = $(e.target);
+	   
+   }
+   console.log(clickedta);
+   
+});
+
+$('#second').on('click', 'div', function(e) {
+   if(!clickedb){
+	    $(e.target).css("backgroundColor", "gray");
+		clickedtb = $(e.target).text();
+		clickedb = true;
+		prevclickb = $(e.target);
+   }
+   else{
+	   prevclickb.css("backgroundColor", "#FFFACD");
+	   $(e.target).css("backgroundColor", "gray");
+	   clickedtb = $(e.target).text();
+	   prevclickb = $(e.target);
+	   
+   }
+   console.log(clickedtb);
+   
+});
+
+function checkClicked(){
+	
+	if(clickeda && clickedb){
+		
+		clicked[0] = clickedta;
+		clicked[1] = clickedtb;
+		check(clicked);
+		
+	}
+	else{
+		$('#label1').html('ΕΠΕΛΕΞΕ ΚΑΙ ΓΙΑ ΤΙΣ ΔΥΟ ΛΕΞΕΙΣ');
+	}
+}
 
 
 function arraysEqual(_arr1, _arr2) {
