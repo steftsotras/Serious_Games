@@ -134,7 +134,6 @@ button
 	height: 60px;
 	font-size: 20px;
 	cursor: pointer;
-	display:none;
 }
 
 .block
@@ -208,6 +207,8 @@ button
 	<div>
 		<label id="label1"></label>
 	</div>
+	
+	<button id="check_btn" type="button">ΕΛΕΓΧΟΣ</button>
 	</div>
 	
 	</div>
@@ -229,7 +230,6 @@ var counter = 0;
 var time = 30;
 var interval = 0;
 var clicked=[];
-var currmotif=[];
 
 var synToUse = [['Αβέβαιος','Απέριττος','Ανώφελος','Αχρηστος','Σύνθετος','Αποκρύπτω'],
 ['Βοήθεια','Μεμονομένα','Χρήσιμα','Επιβεβαίωση','Εγκώμιο','Αξία'],
@@ -244,9 +244,8 @@ var antToUse = [['Ησυχία','Ύπαρξη','Θόρυβος','Ένταση','
 var ant      = ['Φασαρία','Υπεράσπιση','Ατομικός'];
 
 
-var currsyn = [];
+var curr = [];
 var currwords = [];
-var currant = [];
 var word;
 var prevrand = 0;
 var rand = 0;
@@ -266,21 +265,27 @@ else if(dif == 3){
 }
 	
 
+document.getElementById("check_btn").onclick = function () {
+    checkClicked();
+};
 
 document.getElementById("back_btn").onclick = function () {
     location.href = "../Menu/menu.php";
 };
 
 document.getElementById("cont_btn").onclick = function () {
-    show_grid()
-	//start();
+    show_grid();
+	$('#check_btn').show();
+	start();
 };
+
 
 
 $(document).ready(function(){
 	
-	//hide_grid();
-	lvl1();
+	hide_grid();
+	$('#check_btn').hide();
+	
 });
 
 
@@ -295,38 +300,30 @@ function show_grid(){
 	
 }
 
-function initial_background(){
-	
-	$('#item1').css("backgroundColor", "#FFFACD");
-	$('#item2').css("backgroundColor", "#FFFACD");
-	$('#item3').css("backgroundColor", "#FFFACD");
-	$('#item4').css("backgroundColor", "#FFFACD");
-	$('#item5').css("backgroundColor", "#FFFACD");
-	$('#item6').css("backgroundColor", "#FFFACD");
-	
-	
-}
 
 function resetClock(){
 	
 	counter = 0;
-	time = 690;
+	time = 90;
 	interval = setInterval("tiktok()",1000);
 	
 }
 
-function starting_game(){
-	
-	initial_background();
-	resetClock();
-	
-}
 
 function start(){
 	
 	$('#cont').hide();
-	initial_background();
-	setTimeout(playMotif,700);
+	resetClock();
+	
+	if(lvl_played == 1 || lvl_played == 12){
+		lvl1();
+	}
+	if(lvl_played == 2 || lvl_played == 22){
+		lvl2();
+	}
+	else if(lvl_played == 3 || lvl_played == 32){
+		lvl3();
+	}
 	
 }
 
@@ -447,7 +444,7 @@ function getSyn(){
 	currwords = [];
 	
 	currwords = [...synToUse[rand]];
-	currsyn[currsyn.length] = syn[rand];
+	curr[curr.length] = syn[rand];
 	
 	word = currwords[0];
 	currwords[0] = syn[rand];
@@ -464,7 +461,7 @@ function getAnt(){
 	rand = Math.floor((Math.random() * 3));
 	
 	currwords = [...antToUse[rand]];
-	currant[currsyn.length] = ant[rand];
+	curr[curr.length] = ant[rand];
 	
 	word = currwords[0];
 	currwords[0] = ant[rand];
@@ -472,45 +469,6 @@ function getAnt(){
 	shuffle(currwords);
 }
 
-
-function playMotif(){
-	
-	var randarr = [1,2,3,4,5,6,7,8,9];
-	shuffle(randarr);
-	
-	
-	if(lvl_played == 1 || lvl_played == 12){
-		currmotif[0] = randarr[0];
-		currmotif[1] = randarr[1];
-		
-		$('#item'+currmotif[0]).css("backgroundColor", "gray");
-		$('#item'+currmotif[1]).css("backgroundColor", "gray");
-	}
-	else if(lvl_played == 2 || lvl_played == 22){
-		currmotif[0] = randarr[0];
-		currmotif[1] = randarr[1];
-		currmotif[2] = randarr[2];
-		
-		$('#item'+currmotif[0]).css("backgroundColor", "gray");
-		$('#item'+currmotif[1]).css("backgroundColor", "gray");
-		$('#item'+currmotif[2]).css("backgroundColor", "gray");
-		
-	}
-	else if(lvl_played == 3 || lvl_played == 32){
-		currmotif[0] = randarr[0];
-		currmotif[1] = randarr[1];
-		currmotif[2] = randarr[2];
-		currmotif[3] = randarr[3];
-		
-		$('#item'+currmotif[0]).css("backgroundColor", "gray");
-		$('#item'+currmotif[1]).css("backgroundColor", "gray");
-		$('#item'+currmotif[2]).css("backgroundColor", "gray");
-		$('#item'+currmotif[3]).css("backgroundColor", "gray");
-	}
-	
-	setTimeout(starting_game,3000);
-	
-}
 
 
 function shuffle(a) {
@@ -524,22 +482,6 @@ function shuffle(a) {
     return a;
 }
 
-
-$('#clickables').on('click', 'div', function(e) {
-   if(clicked.length < currmotif.length){
-	    $(e.target).css("backgroundColor", "gray");
-		clicked[clicked.length] = parseInt($(e.target).attr('value'), 10);
-   }
-   else if(clicked.length > currmotif.length){
-	    mistake();
-	   
-   }
-   
-   
-   if(clicked.length == currmotif.length){
-	   check(clicked);
-   }  
-});
 
 
 $('#first').on('click', 'div', function(e) {
@@ -594,15 +536,11 @@ function checkClicked(){
 
 
 function arraysEqual(_arr1, _arr2) {
-
-    var arr1 = _arr1.concat().sort();
-    var arr2 = _arr2.concat().sort();
-
-    for (var i = 0; i < arr1.length; i++) {
-
-        if (arr1[i] !== arr2[i])
-            return false;
-
+	
+	console.log(_arr1);
+	console.log(_arr2);
+    if (_arr1[0] != _arr2[0] || _arr1[1] != _arr2[1]){
+        return false;
     }
 
     return true;
@@ -610,7 +548,12 @@ function arraysEqual(_arr1, _arr2) {
 }
 
 function newlvl(){
+	clickeda = false;
+	clickedb = false;
 	clicked = [];
+	curr = [];
+	prevclickb.css("backgroundColor", "#FFFACD");
+	prevclicka.css("backgroundColor", "#FFFACD");
 	clearInterval(interval);
 	start();
 	
@@ -618,8 +561,12 @@ function newlvl(){
 
 function mistake(){
 	
+	clickeda = false;
+	clickedb = false;
 	clicked = [];
-	initial_background();
+	prevclickb.css("backgroundColor", "#FFFACD");
+	prevclicka.css("backgroundColor", "#FFFACD");
+	
 }
 
 
@@ -627,7 +574,7 @@ function check(clicked){
 	
 	
 	if(lvl_played == 1){
-		if(arraysEqual(clicked, currmotif)){
+		if(arraysEqual(clicked, curr)){
 			if(dif == 1){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ, ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
 				lvl_played = 12;
@@ -646,7 +593,7 @@ function check(clicked){
 		}
 	}
 	else if(lvl_played == 12){
-		if(arraysEqual(clicked, currmotif)){
+		if(arraysEqual(clicked, curr)){
 		
 			clearInterval(interval);
 			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(10));
@@ -657,7 +604,7 @@ function check(clicked){
 		}
 	}
 	else if(lvl_played == 2){
-		if(arraysEqual(clicked, currmotif)){
+		if(arraysEqual(clicked, curr)){
 			if(dif == 2){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ, ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
 				lvl_played = 22;
@@ -680,7 +627,7 @@ function check(clicked){
 		}
 	}
 	else if(lvl_played == 22){
-		if(arraysEqual(clicked, currmotif)){
+		if(arraysEqual(clicked, curr)){
 			
 			clearInterval(interval);
 			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(20));
@@ -693,7 +640,7 @@ function check(clicked){
 		}
 	}
 	else if(lvl_played == 3){
-		if(arraysEqual(clicked, currmotif)){
+		if(arraysEqual(clicked, curr)){
 			if(dif == 3){
 				$('#label1').html('ΜΠΡΑΒΟ!!! ΟΛΟΚΛΗΡΩΣΕΣ ΤΗΝ ΠΡΩΤΗ ΔΟΚΙΜΑΣΙΑ ΣΥΜΠΛΗΡΩΣΕ ΤΗ ΔΕΥΤΕΡΗ');
 				lvl_played = 32;
@@ -710,7 +657,7 @@ function check(clicked){
 		}
 	}
 	else if(lvl_played == 32){
-		if(arraysEqual(clicked, currmotif)){
+		if(arraysEqual(clicked, curr)){
 				
 			clearInterval(interval);
 			$('#label1').html('ΣΥΓΧΑΡΗΤΗΡΙΑ!!! ΝΙΚΗΣΕΣ ΤΟ ΠΑΙΧΝΙΔΙ ΜΕ SCORE: '+points(40));

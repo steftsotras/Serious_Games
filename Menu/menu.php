@@ -104,6 +104,7 @@ h1 {
 			<div id="sub"><img src="../Images/ypologismos.png" class="images" id="g1" /></div>
 			<div id="sub"><img src="../Images/sounds.png" class="images" id="g2" /></div>
 			<div id="sub"><img src="../Images/motif.png" class="images" id="g3" /></div>
+			<div id="sub"><img src="../Images/synonyms.png" class="images" id="g4" /></div>
 			
 		</div>
 		</div>
@@ -143,6 +144,9 @@ document.getElementById("g3").onclick = function () {
         location.href = "../Games/motif.php";
 };
 
+document.getElementById("g4").onclick = function () {
+        location.href = "../Games/synonyms.php";
+};
 
 $(document).ready(function(){
     
