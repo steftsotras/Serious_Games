@@ -12,16 +12,19 @@
  <h2>Είσοδος Χρήστη</h2>
  
  <style>
-     h2{
-         color :#ffa31a;
-     }
-       body {
+ h2{
+	 color :#ffa31a;
+ }
+	 
+body {
   background-color: #2f2f1e;
 }
+
 h1 {
   color: #ffa31a;
   margin-left: 40px;
 } 
+
 tr {
 color: #ffa31a;
 margin-left: 30px;
@@ -30,13 +33,24 @@ line-height: 25pt;
 font-family: Arial, sans serif;        
 }
 
+
+#btn{
+	
+	background-color: #FF6347;
+	color: black;
+	width: 250px;
+	height: 38px;
+	font-size: 20px;
+	cursor: pointer;
+
+}
         
     </style>
 </head>
 <body>
      
     <form name="login" method="post" action="Login_Register/Login.php">
-    <table>
+    <table cellspacing="10" width="900">
         <tr>
              <td>Αναγνωριστικό Χρήστη</td>
             <td><input type="text" name="username"
@@ -50,9 +64,7 @@ font-family: Arial, sans serif;
         
              <tr>
             <td>
-	<form action="profile.php">
-             <input type="submit" value="Submit">
-            </form> 
+            <input id="btn" type="submit" value="ΥΠΟΒΟΛΗ">
 
             </td>
             
@@ -63,11 +75,14 @@ font-family: Arial, sans serif;
         </tr>
     </table>
         </form>
-	
+		
+<br>
+<br>
+<div>
 	<audio controls>
-  <source src="Recording1.m4a" type="audio/mpeg">
-</audio>
-    
+		<source src=" Help/login.mp3" type="audio/mpeg">
+	</audio>
+</div>  
     
     <?php
 			

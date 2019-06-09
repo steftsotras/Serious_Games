@@ -153,6 +153,14 @@ button
 	
 	<div id="cont"><button id="cont_btn" type="button">ΕΚΚΙΝΗΣΗ</button></div>
 	
+	<br>
+	
+	<div id="audiocont">
+			<audio controls>
+				<source src="../Help/tairiasma_hxwn.mp3" type="audio/mpeg">
+			</audio>
+	</div> 
+	
 	<div class="grid-container" id="clickables">
 	  <div id="item1" class="item1"><img value=1 src="../Images/image_sounds/app.png" id="g1" /></div>
 	  <div id="item2" class="item2"><img value=2 src="../Images/image_sounds/cat.png" id="g1" /></div>
@@ -262,6 +270,7 @@ function hide_grid(){
 function start(){
 	
 	hide_grid();
+	$('#audiocont').hide();
 	$('#cont').hide();
 	
 	if(lvl_played == 1 || lvl_played == 12){

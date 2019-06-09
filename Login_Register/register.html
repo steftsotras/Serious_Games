@@ -6,31 +6,59 @@
 <h2>Δημιουργία Λογαριασμού</h2>
     <meta charset="UTF-8">
     <style>
-	h2{
+
+h2{
 	color : #ffa31a;
-	}
-       body {
+}
+	
+body {
   background-color: #2f2f1e;
 }
+
 h1 {
   color: #ffa31a;
   margin-left: 40px;
 } 
+
 tr {
+
 color: #ffa31a;
-margin-left: 10px;
+
 font-size: 18pt;
 line-height: 25pt;
-font-family: Arial, sans serif;       
+font-family: Arial, sans serif;      
+ 
+}
+
+
+#btn{
+	
+	background-color: #FF6347;
+	color: black;
+	width: 250px;
+	height: 38px;
+	font-size: 20px;
+	cursor: pointer;
+
+}
+
+#center {
+	flex: 1;
+}
+
+#container {
+	display: flex;
+	position: relative;
 }
 
         
     </style>
 </head>
 <body>
-   
+	<div id="container">
+   <div id="center">
     <form action="register_server.php" method="post">
-    <table>
+    <table cellspacing="6" width="800">
         <tr>
             <td>Αναγνωριστικό Χρήστη</td>
             <td><input type="text" name="username"
@@ -44,11 +72,13 @@ font-family: Arial, sans serif;
         </tr>
         
         <tr>
-            <td>Φύλλο</td>
-            <td><input type="radio" name="gender" value="male">ΑΡΣΕΝΙΚΟ</td>
-            <td><input type="radio" name="gender" value="female" style="margin-left: -300px" />ΘΥΛΗΚΟ</td>
-            
-        </tr>
+				<tr>
+					<td>Φύλλο</td>
+					<td><input type="radio" name="gender" value="male">ΑΡΣΕΝΙΚΟ</td>
+					
+				</tr>
+				<tr><td></td><td><input type="radio" name="gender" value="female"/>ΘΥΛΗΚΟ</td></tr>
+				</tr>
         
         <tr>
             <td>Πόλη διαμονής</td>
@@ -62,13 +92,15 @@ font-family: Arial, sans serif;
         </tr>
         
         <tr>
-            <td>Εκπαίδευση</td>
-            <td><input type="radio" name="education" value="none">ΚΑΜΙΑ</td>
-            <td><input type="radio" name="education" value="elementary" style="margin-left: -430px" />ΔΗΜΟΤΙΚΟ</td>
-            <td><input type="radio" name="education" value="second" style="margin-left: -280px" />ΓΥΜΝΑΣΙΟ</td>
-            <td><input type="radio" name="education" value="high" style="margin-left: -130px" />ΛΥΚΕΙΟ</td>
-            <td><input type="radio" name="education" value="uni" style="margin-left: -10px" >ΠΑΝΕΠΙΣΤΗΜΙΟ</td>
-        </tr>
+					<tr>
+					<td>Εκπαίδευση</td>
+					<td><input type="radio" name="education" value="none">ΚΑΜΙΑ</td>
+					</tr>
+					<tr><td></td><td><input type="radio" name="education" value="elementary" />ΔΗΜΟΤΙΚΟ</td></tr>
+					<tr><td></td><td><input type="radio" name="education" value="second" />ΓΥΜΝΑΣΙΟ</td></tr>
+					<tr><td></td><td><input type="radio" name="education" value="high" />ΛΥΚΕΙΟ</td></tr>
+					<tr><td></td><td><input type="radio" name="education" value="uni" >ΠΑΝΕΠΙΣΤΗΜΙΟ</td></tr>
+				</tr>
 		
 		<tr>
             <td>Επιλογή επιπέδου δυσκολίας</td>   
@@ -81,30 +113,33 @@ font-family: Arial, sans serif;
             <option value=3>ΠΡΟΧΩΡΗΜΕΝΟ</option>
             <option value=4>ΕΥΚΟΛΟ ΕΩΣ ΜΕΣΑΙΟ</option>
 			</select>
-                    </td>
-            </tr>
+            </td>
+        </tr>
 		
         
-			<tr>
-            <td><input type="submit" name="submit"
-            value="Submit">
+		<tr>
+            <td><input id="btn" type="submit" name="submit"
+            value="ΥΠΟΒΟΛΗ">
             </td>
-            
-            <td>
-                ΕΙΣΤΕ ΗΔΗ ΧΡΗΣΤΗΣ?<a href="../index.php" style="color:red;margin-left: 25px">πατήστε εδώ για είσοδο</a>
-            </td>
+			<td>
+				ΕΙΣΤΕ ΗΔΗ ΧΡΗΣΤΗΣ?<a href="../index.php" style="color:red;margin-left: 25px">πατήστε εδώ για είσοδο</a>
+			</td>
             
         </tr>
-        
-        
-        
-        
+		
+		
     </table>
             </form>
+	</div>
 	
+	</div>
+	<br>
+	<br>
+	<div>
 	<audio controls>
-  <source src="Recording3.m4a" type="audio/mpeg">
-</audio>
+		<source src="../Help/register.mp3" type="audio/mpeg">
+	</audio>
+	</div>
 
 </body>
 </html>

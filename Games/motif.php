@@ -153,6 +153,14 @@ button
 	
 	<div id="cont"><button id="cont_btn" type="button">ΕΚΚΙΝΗΣΗ</button></div>
 	
+	<br>
+	
+	<div id="audiocont">
+			<audio controls>
+				<source src="../Help/motivo.mp3" type="audio/mpeg">
+			</audio>
+	</div> 
+	
 	<div class="grid-container" id="clickables">
 	  <div id="item1" class="item1" value=1></div>
 	  <div id="item2" class="item2" value=2></div>
@@ -209,7 +217,8 @@ document.getElementById("back_btn").onclick = function () {
 };
 
 document.getElementById("cont_btn").onclick = function () {
-    show_grid();
+    
+	show_grid();
 	start();
 };
 
@@ -290,7 +299,7 @@ function starting_game(){
 }
 
 function start(){
-	
+	$('#audiocont').hide();
 	$('#cont').hide();
 	initial_background();
 	setTimeout(playMotif,700);

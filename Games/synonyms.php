@@ -170,13 +170,21 @@ button
 	
 	<div id="cont"><button id="cont_btn" type="button">ΕΚΚΙΝΗΣΗ</button></div>
 	
+	<br>
+	
+	<div id="audiocont">
+			<audio controls>
+				<source src="../Help/sunwnhna.mp3" type="audio/mpeg">
+			</audio>
+	</div> 
+	
 	<div id ="game">
 	<div class="block">
 	
-	<label class="labels" id="first_label">Βρες το</label>
+	<label class="labels" id="first_label"></label>
 	
 	<div class="grid-container" id="first">
-	  <div id="item1" class="item1" value=1>malaka</div>
+	  <div id="item1" class="item1" value=1></div>
 	  <div id="item2" class="item2" value=2></div>
 	  <div id="item3" class="item3" value=3></div>  
 	  <div id="item4" class="item4" value=4></div>
@@ -189,7 +197,7 @@ button
 	
 	<div class="block">
 		
-	<label class="labels" id="second_label">Βρες το</label>
+	<label class="labels" id="second_label"></label>
 	
 	<div class="grid-container" id="second">
 	  <div id="item21" class="item21" value=21></div>
@@ -275,6 +283,8 @@ document.getElementById("back_btn").onclick = function () {
 
 document.getElementById("cont_btn").onclick = function () {
     show_grid();
+	
+	$('#audiocont').hide();
 	$('#check_btn').show();
 	start();
 };

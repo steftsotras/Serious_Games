@@ -114,7 +114,7 @@ button
 #wrapper {
     width: 600px;
 	height:120px;
-    overflow: hidden; /* will contain if #first is longer than #second */
+    overflow: hidden;
 	
 }
 
@@ -123,6 +123,16 @@ button
 	margin-left:47px;
     width: 170px;
     float:left; /* add this */
+}
+
+#cont_btn
+{
+	background-color:green;
+	color: black;
+	width: 270px;
+	height: 60px;
+	font-size: 20px;
+	cursor: pointer;
 }
 
 </style>
@@ -148,7 +158,17 @@ button
 	
 	</div>
 	
-	<div class="grid-container">
+	<div id="cont"><button id="cont_btn" type="button">ΕΚΚΙΝΗΣΗ</button></div>
+	
+	<br>
+	
+	<div id="audiocont">
+			<audio controls>
+				<source src="../Help/upologismos.mp3" type="audio/mpeg">
+			</audio>
+	</div> 
+	
+	<div class="grid-container" id="game">
 	  <div id="item1" class="item1"></div>
 	  <div id="item2" class="item2"></div>
 	  <div id="item3" class="item3"><textarea id="text3"></textarea></div>  
@@ -201,6 +221,10 @@ var counter = 0;
 var time = 90;
 var interval = 0;
 
+document.getElementById("cont_btn").onclick = function () {
+    start();
+};
+
 document.getElementById("clear_btn").onclick = function () {
     clear();
 };
@@ -215,7 +239,31 @@ document.getElementById("check_btn").onclick = function () {
 
 $(document).ready(function(){
 	
+	hide_grid();
 	
+	
+});
+
+
+function hide_grid(){
+	$('#game').hide();
+	$('#check_btn').hide();
+	$('#clear_btn').hide();
+	
+}
+
+function show_grid(){
+	$('#audiocont').hide();
+	$('#cont_btn').hide();
+	$('#game').show();
+	$('#check_btn').show();
+	$('#clear_btn').show();
+	
+}
+
+function start(){
+	
+	show_grid();
 	
 	if(dif == 1 || dif == 4 || dif == 5){
 		lvl_played = 1;
@@ -232,7 +280,7 @@ $(document).ready(function(){
 	
 	interval = setInterval("tiktok()",1000);
 	
-});
+}
 
 
 function tiktok(){

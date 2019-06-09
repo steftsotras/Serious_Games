@@ -1,7 +1,7 @@
  <?php
 include "../connect.php";
 
-if ($_SERVER['REQUEST_METHOD'] == "POST" && (isset($_POST['submit'])) && ($_POST['submit'] == 'Submit')) {
+if ($_SERVER['REQUEST_METHOD'] == "POST" && (isset($_POST['submit']))) {
 
     
     $username = mysqli_real_escape_string($link, $_POST['username']);

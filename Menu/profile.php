@@ -87,6 +87,16 @@ color: #ffa31a;
 	cursor: pointer;
 }
 
+.change_btn {
+	
+	background-color: 	#FF6347;
+	color: black;
+	width: 300px;
+	height: 38px;
+	font-size: 15px;
+	cursor: pointer;
+}
+
 
 </style>
     
@@ -98,7 +108,12 @@ color: #ffa31a;
 		
 		<div id="live_data"></div>
 		
-		</div>
+		<div id="audiocont">
+			<audio controls>
+				<source src="../Help/profil.mp3" type="audio/mpeg">
+			</audio>
+		</div> 
+	</div>
 	<div id="container">	
 		
 		
@@ -138,7 +153,7 @@ color: #ffa31a;
 				</tr>
 				
 				<tr>
-				<td><button id="submit_btn" >ΑΛΛΑΓΗ ΔΗΜΟΓΡΑΦΙΚΩΝ ΣΤΟΙΧΕΙΩΝ</button>
+				<td><button class="change_btn" id="submit_btn" >ΑΛΛΑΓΗ ΔΗΜΟΓΡΑΦΙΚΩΝ ΣΤΟΙΧΕΙΩΝ</button>
 				</td>
 				</tr>
 			</table>
@@ -158,12 +173,11 @@ color: #ffa31a;
 				<td><input type="password" name="password"
 						   placeholder="εισαγωγη εδω"></td></tr>
 			<tr>
-				<td><button id="pass_btn">ΑΛΛΑΓΗ ΚΩΔΙΚΟΥ</button></td>
+				<td><button class="change_btn" id="pass_btn">ΑΛΛΑΓΗ ΚΩΔΙΚΟΥ</button></td>
 			</tr>
 			</table>
 			</div>
 			
-			<br>
 			<div>
 			<table>
 			<tr>
@@ -185,7 +199,7 @@ color: #ffa31a;
 			</td>
 			</tr>
 			<tr>
-			<p><td><button id="diff_btn">ΑΛΛΑΓΗ ΔΥΣΚΟΛΙΑΣ</button></p>
+			<p><td><button class="change_btn" id="diff_btn">ΑΛΛΑΓΗ ΔΥΣΚΟΛΙΑΣ</button></p>
 			</tr>
 			</table>
 			</div>
